@@ -1,0 +1,27 @@
+size 32 32
+
+tiledstate button-passive 0 0 0 0 32 32
+tiledstate button-hover 1 0 0 0 32 32
+tiledstate button-click 2 0 0 0 32 32
+
+tiledstate slider-body 0 0 0 0 32 32
+
+tiledstate slider-passive 3 0 0 0 32 32
+tiledstate slider-hover 1 0 0 0 32 32
+tiledstate slider-click 2 0 0 0 32 32
+
+tiledstate textfield-passive 0 0 0 0 32 32
+tiledstate textfield-hover 1 0 0 0 32 32
+tiledstate textfield-click 2 0 0 0 32 32
+
+tiledstate dropmenu-passive 0 0 0 0 32 32
+tiledstate dropmenu-hover 1 0 0 0 32 32
+tiledstate dropmenu-click 2 0 0 0 32 32
+
+tiledstate dropmenu-arrow 4 0 0 0 32 32
+
+tiledstate checkbox-passive 0 0 1 1 31 31
+tiledstate checkbox-hover 1 0 1 1 31 31
+tiledstate checkbox-click 2 0 1 1 31 31
+
+tiledstate checkbox-check 5 0 1 1 31 31
