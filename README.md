@@ -11,10 +11,10 @@ parrlib focuses mainly on 2D apps, however there are already some 3D-oriented he
 currently documentation is pretty much non-existent (i only wrote comments when i felt like it), i'll try to document more functions in the future
 
 if you want to compile a program using parrlib in its entirety, you'll need to compile (or find pre-compiled binaries of) the following external libraries:
-  -GLFW alongside GLAD
-  -SOIL                 --to load textures
-  -freetype2            --mandatory, for text rendering
-  -alut                 --if you use audio
-  -assimp               --if you want to load 3d models made with external programs
+  * GLFW alongside GLAD
+  * SOIL                 --to load textures
+  * freetype2            --mandatory, for text rendering
+  * alut                 --if you use audio
+  * assimp               --if you want to load 3d models made with external programs
   
 i would provide include and library files myself (at least for Windows), but right now i don't know if i'm legally allowed to do so.
