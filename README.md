@@ -11,7 +11,7 @@ parrlib focuses mainly on 2D apps, however there are already some 3D-oriented he
 currently documentation is pretty much non-existent (i only wrote comments when i felt like it), i'll try to document more functions in the future
 
 if you want to compile a program using parrlib in its entirety, you'll need to compile (or find pre-compiled binaries of) the following external libraries:
-  * GLFW alongside GLAD
+  * GLFW
   * SOIL                 --to load textures
   * freetype2            --mandatory, for text rendering
   * alut                 --if you use audio
