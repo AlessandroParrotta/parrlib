@@ -1,0 +1,275 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "parrlib",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "atlas.ase::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atlas.ase-Debug-615392d84465b6b20943.json",
+					"name" : "atlas.ase",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "atlas.png::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atlas.png-Debug-b7c70d6131521d9c794d.json",
+					"name" : "atlas.png",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "atlas.spt::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atlas.spt-Debug-8e0f9b0b1ae85525ee85.json",
+					"name" : "atlas.spt",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "atlas_bp.ase::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atlas_bp.ase-Debug-15caddf06210f57db280.json",
+					"name" : "atlas_bp.ase",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "atlas_bp.png::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atlas_bp.png-Debug-05b42ffa796be0d4bf26.json",
+					"name" : "atlas_bp.png",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "atlas_bp.spt::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-atlas_bp.spt-Debug-93a50db155e92d2d3bf1.json",
+					"name" : "atlas_bp.spt",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "debugMenuBlend.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-debugMenuBlend.frag-Debug-cc4c6031ac9638f04b58.json",
+					"name" : "debugMenuBlend.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fastGaussian.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fastGaussian.frag-Debug-a2d62b03cbc81e7133ea.json",
+					"name" : "fastGaussian.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fboShader.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fboShader.frag-Debug-b23b0c8243f77b3386a0.json",
+					"name" : "fboShader.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "light.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-light.frag-Debug-93d5c8eeff050ada739e.json",
+					"name" : "light.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mesh3draw.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mesh3draw.frag-Debug-88ac8d4e0ca8b5cd789b.json",
+					"name" : "mesh3draw.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mesh3draw.vert::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mesh3draw.vert-Debug-242cf090e90a2dce72e5.json",
+					"name" : "mesh3draw.vert",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mytest::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mytest-Debug-d6079011f77153902959.json",
+					"name" : "mytest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "segoeui.ttf::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-segoeui.ttf-Debug-5613893aa194575ebaf3.json",
+					"name" : "segoeui.ttf",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "shadowMap.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-shadowMap.frag-Debug-b728acf0a6edb14f117a.json",
+					"name" : "shadowMap.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "spritebatch.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-spritebatch.frag-Debug-e946b6189977443d596b.json",
+					"name" : "spritebatch.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "spritebatch.vert::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-spritebatch.vert-Debug-5044d5c0724bf44a3c1c.json",
+					"name" : "spritebatch.vert",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "standard.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-standard.frag-Debug-0b0d70574c857a5cb3ae.json",
+					"name" : "standard.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "standard.vert::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-standard.vert-Debug-d4bd9d0011992cc79190.json",
+					"name" : "standard.vert",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "standardVBO.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-standardVBO.frag-Debug-16624a5f503e5b870890.json",
+					"name" : "standardVBO.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "standardVBO.vert::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-standardVBO.vert-Debug-1880cd24e76ab340b32d.json",
+					"name" : "standardVBO.vert",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "textRender.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-textRender.frag-Debug-d8275b5ad0b142cfe54b.json",
+					"name" : "textRender.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "textRender.vert::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-textRender.vert-Debug-b5642b81ff268a2aca08.json",
+					"name" : "textRender.vert",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "textRenderOld.frag::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-textRenderOld.frag-Debug-b8f8ac24f2cc6def4417.json",
+					"name" : "textRenderOld.frag",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "textRenderOld.vert::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-textRenderOld.vert-Debug-ccff2b285b8bfc8c3a98.json",
+					"name" : "textRenderOld.vert",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "F:/Programming/VisualC++/C++/Libraries/Git/parrlib/out/build/x64-Debug",
+		"source" : "F:/Programming/VisualC++/C++/Libraries/Git/parrlib"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}
