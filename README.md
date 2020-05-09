@@ -18,3 +18,7 @@ if you want to compile a program using parrlib in its entirety, you'll need to c
   * assimp               --if you want to load 3d models made with external programs
   
 external include files have already been provided to guarantee the compilation of parrlib (in the thirdparty/ folder), i would provide library files myself (at least for Windows), but right now i don't know if i'm legally allowed to do so.
+
+# examples
+if you want to get started with parrlib, i suggest taking a look at my other repository [examples](https://github.com/AlessandroParrotta/parrlib-examples)
+i suggest reading the README file there as the examples are not set up for compilation
