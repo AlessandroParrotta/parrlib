@@ -19,8 +19,8 @@ if you want to compile a program using parrlib in its entirety, you'll need to c
   
 external include files have already been provided to guarantee the compilation of parrlib (in the thirdparty/ folder), i would provide library files myself (at least for Windows), but right now i don't know if i'm legally allowed to do so.
 
-# Pre-compiled binary (Windows)
-[here](https://mega.nz/file/FqRQyQCL#SAyBrLUl3MbqVdp10cEThBnv2ad1cr1xmgA8HUGC8z0) is a pre-compiled binary of parrlib (x64-Release), keep in mind it might not be updated to the latest commit
+# Pre-compiled binaries (Windows)
+[here](https://mega.nz/file/YqpWlIyJ#n6ChUaYPZ7qxg3sVQun5iPXULTxRZMvkkN3zQooJzPw) are the pre-compiled binaries of parrlib for Windows (x86,x64, both release and debug), keep in mind it might not be updated to the latest commit
 
 # Examples
 if you want to get started with parrlib, i suggest taking a look at my other repository [examples](https://github.com/AlessandroParrotta/parrlib-examples)
