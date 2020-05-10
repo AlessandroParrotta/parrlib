@@ -24,5 +24,3 @@ external include files have already been provided to guarantee the compilation o
 
 # Examples
 if you want to get started with parrlib, i suggest taking a look at my other repository [examples](https://github.com/AlessandroParrotta/parrlib-examples)
-
-i suggest reading the README file there as the examples are not set up for compilation
