@@ -17,6 +17,11 @@ public:
 	constexpr T operator[](size_t i) const { return v[i]; }
 
 	constexpr VectorT() {}
+	//constexpr VectorT(VectorT<T,L> const& v) {
+	//	for (int i = 0; i < L; i++) v[i] = v.v[i];
+	//}
+
+	constexpr VectorT(T vs) { for (int i = 0; i < L; i++) v[i] = vs; }
 
 	template<typename... Args>
 	constexpr VectorT(Args... vals) {
@@ -55,19 +60,45 @@ public:
 	constexpr size_t length() const { return L; }
 
 	template<unsigned int LL = L>
-	typename std::enable_if<LL == 2 && L == 2, T>::type
+	constexpr typename std::enable_if<LL == 2 && L == 2, T>::type
 	cross(VectorT<T, 2> const& ov) {
 		return v[0] * ov[1] - v[1] * ov[0];
 	}
 
 	template<unsigned int LL = L>
-	VectorT<typename std::enable_if<LL == 3 && L == 3, T>::type, LL>
+	constexpr VectorT<typename std::enable_if<LL == 3 && L == 3, T>::type, LL>
 	cross(VectorT<T, 3> const& ov) {
 		return { v[1] * ov[2] - v[2] - ov[1], v[2] * ov[0] - v[0] - ov[2], v[0] * ov[1] - v[1] * ov[0] };
 	}
 
+	constexpr VectorT<T, L> sz(const char* str) {
+		VectorT<T, L> res = static_cast<T>(0);
+
+		int pos = 0;
+		int c = 0;
+		while (pos < L && c < std::strlen(str)) {
+			bool neg = false;
+			if (str[c] == 'n') { neg = true; c++; }
+
+			if (c < strlen(str)) {
+				if (str[c] == 'x' || str[c] == 'r') { res[pos] = v[0] * (neg ? -1 : 1); pos++; }
+				else if (str[c] == 'y' || str[c] == 'g') { res[pos] = v[1] * (neg ? -1 : 1); pos++; }
+				else if (str[c] == 'x' || str[c] == 'b') { res[pos] = v[2] * (neg ? -1 : 1); pos++; }
+				else if (str[c] == 'w' || str[c] == 'a') { res[pos] = v[3] * (neg ? -1 : 1); pos++; }
+			}
+
+			c++;
+		}
+
+		return res;
+	}
+
 	std::string toString() const { std::stringstream ss ;ss << *this; return ss.str(); }
 	std::wstring toWString() const { std::wstringstream ss; ss << *this; return ss.str(); }
+
+	constexpr VectorT<T, L>& operator=(VectorT<T, L> const& o) {
+		for (int i = 0; i < L; i++) v[i] = o[i]; return *this;
+	}
 };
 
 template<typename T, size_t L>
@@ -89,6 +120,9 @@ constexpr std::wostream& operator<<(std::wostream& os, VectorT<T, L> v) {
 	os << L")";
 	return os;
 }
+
+template<typename T, unsigned int L>
+using vect = VectorT<T, L>;
 
 typedef VectorT<int, 2> Vector2i;
 typedef Vector2i vec2i;
