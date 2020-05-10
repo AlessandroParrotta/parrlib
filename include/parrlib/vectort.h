@@ -26,9 +26,12 @@ public:
 	template<typename... Args>
 	constexpr VectorT(Args... vals) {
 		const int size = sizeof...(vals);
-		static_assert(size >= L, "number of parameters must be greater or equal to length of vector");
+		//static_assert(size >= L, "number of parameters must be greater or equal to length of vector");
+		
 		std::array<T, size> tarr = { vals... };
-		for (int i = 0; i < L; i++) v[i] = tarr[i];
+		if (size >= L)	for (int i = 0; i < L; i++) v[i] = tarr[i];
+		else			for (int i = 0; i < L; i++) v[i] = tarr[(i >= size ? size-1 : i)];
+		
 		//this solution might be unoptimized, i must find a way to expand only part of the pack 
 		//directly without going through another array
 	}
@@ -59,13 +62,13 @@ public:
 	constexpr VectorT<T, L> abs() const { VectorT<T, L> res;  for (int i = 0; i < L; i++) res[i] = (v[i] < static_cast<T>(0) ? -v[i] : v[i]); return res; }
 	constexpr size_t length() const { return L; }
 
-	template<unsigned int LL = L>
+	template<size_t LL = L>
 	constexpr typename std::enable_if<LL == 2 && L == 2, T>::type
 	cross(VectorT<T, 2> const& ov) {
 		return v[0] * ov[1] - v[1] * ov[0];
 	}
 
-	template<unsigned int LL = L>
+	template<size_t LL = L>
 	constexpr VectorT<typename std::enable_if<LL == 3 && L == 3, T>::type, LL>
 	cross(VectorT<T, 3> const& ov) {
 		return { v[1] * ov[2] - v[2] - ov[1], v[2] * ov[0] - v[0] - ov[2], v[0] * ov[1] - v[1] * ov[0] };
@@ -93,13 +96,38 @@ public:
 		return res;
 	}
 
-	std::string toString() const { std::stringstream ss ;ss << *this; return ss.str(); }
+	constexpr VectorT<T, L> rand() { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = rand()%std::numeric_limits<T>::max(); return res; }
+
+	std::string toString() const { std::stringstream ss; ss << *this; return ss.str(); }
 	std::wstring toWString() const { std::wstringstream ss; ss << *this; return ss.str(); }
 
-	constexpr VectorT<T, L>& operator=(VectorT<T, L> const& o) {
-		for (int i = 0; i < L; i++) v[i] = o[i]; return *this;
-	}
+	constexpr VectorT<T, L>& operator=(VectorT<T, L> const& o) { for (int i = 0; i < L; i++) v[i] = o[i]; return *this; }
+	
+	constexpr VectorT<T, L> operator+(VectorT<T, L> const& o) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] + o[i]; return res; }
+	constexpr VectorT<T, L> operator-(VectorT<T, L> const& o) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] - o[i]; return res; }
+	constexpr VectorT<T, L> operator*(VectorT<T, L> const& o) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] * o[i]; return res; }
+	constexpr VectorT<T, L> operator/(VectorT<T, L> const& o) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] / o[i]; return res; }
+	
+	constexpr VectorT<T, L>& operator+=(VectorT<T, L> const& o) { for (int i = 0; i < L; i++) v[i] += o[i]; return *this; }
+	constexpr VectorT<T, L>& operator-=(VectorT<T, L> const& o) { for (int i = 0; i < L; i++) v[i] -= o[i]; return *this; }
+	constexpr VectorT<T, L>& operator*=(VectorT<T, L> const& o) { for (int i = 0; i < L; i++) v[i] *= o[i]; return *this; }
+	constexpr VectorT<T, L>& operator/=(VectorT<T, L> const& o) { for (int i = 0; i < L; i++) v[i] /= o[i]; return *this; }
+	
+	constexpr VectorT<T, L> operator+(T f) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] + f; return res; }
+	constexpr VectorT<T, L> operator-(T f) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] - f; return res; }
+	constexpr VectorT<T, L> operator*(T f) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] * f; return res; }
+	constexpr VectorT<T, L> operator/(T f) const { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = v[i] / f; return res; }
+
+	constexpr VectorT<T, L>& operator+=(T f) { for (int i = 0; i < L; i++) v[i] += f; return *this; }
+	constexpr VectorT<T, L>& operator-=(T f) { for (int i = 0; i < L; i++) v[i] -= f; return *this; }
+	constexpr VectorT<T, L>& operator*=(T f) { for (int i = 0; i < L; i++) v[i] *= f; return *this; }
+	constexpr VectorT<T, L>& operator/=(T f) { for (int i = 0; i < L; i++) v[i] /= f; return *this; }
 };
+
+template<typename T, size_t L> constexpr VectorT<T, L> operator+(T f, VectorT<T, L> const& v) { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = f + v[i]; return res; }
+template<typename T, size_t L> constexpr VectorT<T, L> operator-(T f, VectorT<T, L> const& v) { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = f - v[i]; return res; }
+template<typename T, size_t L> constexpr VectorT<T, L> operator*(T f, VectorT<T, L> const& v) { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = f * v[i]; return res; }
+template<typename T, size_t L> constexpr VectorT<T, L> operator/(T f, VectorT<T, L> const& v) { VectorT<T, L> res; for (int i = 0; i < L; i++) res[i] = f / v[i]; return res; }
 
 template<typename T, size_t L>
 constexpr std::ostream& operator<<(std::ostream& os, VectorT<T, L> v) {
