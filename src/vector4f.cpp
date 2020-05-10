@@ -528,6 +528,31 @@ Vector3f Vector4f::abr() const { return { w, z, x }; }
 Vector3f Vector4f::agb() const { return { w, y, z }; }
 Vector3f Vector4f::abg() const { return { w, z, y }; }
 
+Vector4f vec4x(float f) { return { f, 0.f, 0.f, 0.f }; }
+Vector4f vec4y(float f) { return { 0.f, f, 0.f, 0.f }; }
+Vector4f vec4z(float f) { return { 0.f, 0.f, f, 0.f }; }
+Vector4f vec4w(float f) { return { 0.f, 0.f, 0.f, f }; }
+
+Vector4f vec4xy(float x, float y) { return { x, y, 0.f, 0.f }; } Vector4f vec4xy(vec2 xy) { return { xy, 0.f, 0.f }; }
+Vector4f vec4xz(float x, float z) { return { x, 0.f, z, 0.f }; } Vector4f vec4xz(vec2 xz) { return { xz.x, 0.f, xz.y, 0.f }; }
+Vector4f vec4xw(float x, float w) { return { x, 0.f, 0.f, w }; } Vector4f vec4xw(vec2 xw) { return { xw.x, 0.f, 0.f, xw.y }; }
+
+Vector4f vec4yz(float y, float z) { return { 0.f, y, z, 0.f }; } Vector4f vec4yz(vec2 yz) { return { 0.f, yz, 0.f }; }
+Vector4f vec4yw(float y, float w) { return { 0.f, y, 0.f, w }; } Vector4f vec4yw(vec2 yw) { return { 0.f, yw.x, 0.f, yw.y }; }
+
+Vector4f vec4zw(float z, float w) { return { 0.f, 0.f, z, w }; } Vector4f vec4zw(vec2 zw) { return { 0.f, 0.f, zw }; }
+
+Vector4f vec4xyz(float x, float y, float z) { return { x, y, z, 0.f }; } Vector4f vec4xyz(vec3 xyz) { return { xyz, 0.f }; }
+Vector4f vec4xyw(float x, float y, float w) { return { x, y, 0.f, w }; } Vector4f vec4xyw(vec3 xyw) { return { xyw.xy(), 0.f, xyw.z }; }
+Vector4f vec4xzw(float x, float z, float w) { return { x, 0.f, z, w }; } Vector4f vec4xzw(vec3 xzw) { return { xzw.x, 0.f, xzw.yz() }; }
+
+Vector4f vec4yzw(float y, float z, float w) { return { 0.f, y, z, w }; } Vector4f vec4yzw(vec3 yzw) { return { 0.f, yzw }; }
+
+Vector4f vec4xfff(float x, float f) { return { x, f, f, f }; } Vector4f vec4xfff(vec2 xf) { return { xf.x, vec3(xf.y) }; }
+Vector4f vec4fyff(float y, float f) { return { f, y, f, f }; }  Vector4f vec4fyff(vec2 yf) { return { yf.y, yf.x, vec2(yf.y) }; }
+Vector4f vec4ffzf(float z, float f) { return { f, f, z, f }; } Vector4f vec4ffzf(vec2 zf) { return { vec2(zf.y), zf.x, zf.y }; }
+Vector4f vec4fffw(float w, float f) { return { f, f, f, w }; } Vector4f vec4fffw(vec2 wf) { return { vec3(wf.y), wf.x }; }
+
 namespace vColor4f {
 	Vector4f white(1.0f);
 	Vector4f black(0.0f,0.0f,0.0f,1.0f);

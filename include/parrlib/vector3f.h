@@ -118,6 +118,14 @@ vec3 vec3x(float x);
 vec3 vec3y(float y);
 vec3 vec3z(float z);
 
+vec3 vec3xy(float x, float y); vec3 vec3xy(vec2 xy);
+vec3 vec3yz(float y, float z); vec3 vec3yz(vec2 yz);
+vec3 vec3xz(float x, float z); vec3 vec3xz(vec2 xz);
+
+vec3 vec3xff(float x, float f); vec3 vec3xz(vec2 fx);
+vec3 vec3fyf(float y, float f); vec3 vec3xz(vec2 fy);
+vec3 vec3ffz(float z, float f); vec3 vec3xz(vec2 fz);
+
 vec3 vec3rand();
 
 namespace v3ax {

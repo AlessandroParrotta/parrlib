@@ -62,7 +62,7 @@ public:
 	//returns a new vec4 following GLSL swizzle syntax with some additions:
 	//you can append 'n' to any of the operators to make them negative (e.g 'nxynzw' returns {-x,y,-z,w})
 	//you can put 'o' in place of a component to zero it out (e.g 'xyoz' returns {x,y,0.f,z})
-	Vector4f Vector4f::sz(std::string const& str) const;
+	Vector4f sz(std::string const& str) const;
 	//Vector4f sz4(std::string const& str) const;
 	//Vector3f sz3(std::string const& str) const;
 	//Vector2f sz2(std::string const& str) const;
@@ -215,6 +215,31 @@ Vector4f operator- (Vector4f const& v);
 
 std::ostream &operator<<(std::ostream &os, Vector4f const& v);
 std::wostream &operator<<(std::wostream &os, Vector4f const& v);
+
+Vector4f vec4x(float f);
+Vector4f vec4y(float f);
+Vector4f vec4z(float f);
+Vector4f vec4w(float f);
+
+Vector4f vec4xy(float x, float y); Vector4f vec4xy(vec2 xy);
+Vector4f vec4xz(float x, float z); Vector4f vec4xz(vec2 xz);
+Vector4f vec4xw(float x, float w); Vector4f vec4xw(vec2 xw);
+
+Vector4f vec4yz(float y, float z); Vector4f vec4yz(vec2 yz);
+Vector4f vec4yw(float y, float w); Vector4f vec4yw(vec2 yw);
+
+Vector4f vec4zw(float z, float w); Vector4f vec4zw(vec2 zw);
+
+Vector4f vec4xyz(float x, float y, float z); Vector4f vec4xyz(vec3 xyz);
+Vector4f vec4xyw(float x, float y, float w); Vector4f vec4xyw(vec3 xyw);
+Vector4f vec4xzw(float x, float z, float w); Vector4f vec4xzw(vec3 xzw);
+
+Vector4f vec4yzw(float y, float z, float w); Vector4f vec4yzw(vec3 yzw);
+
+Vector4f vec4xfff(float x, float f); Vector4f vec4xfff(vec2 xf);
+Vector4f vec4fyff(float y, float f); Vector4f vec4fyff(vec2 yf);
+Vector4f vec4ffzf(float z, float f); Vector4f vec4ffzf(vec2 zf);
+Vector4f vec4fffw(float w, float f); Vector4f vec4fffw(vec2 wf);
 
 namespace vColor4f {
 	extern Vector4f white;

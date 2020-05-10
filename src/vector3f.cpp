@@ -336,4 +336,8 @@ vec3 vec3x(float x) { return vec3(x, 0.f, 0.f); }
 vec3 vec3y(float y) { return vec3(0.f, y, 0.f); }
 vec3 vec3z(float z) { return vec3(0.f, 0.f, z); }
 
+vec3 vec3xy(float x, float y) { return vec3(x, y, 0.f); } vec3 vec3xy(vec2 xy) { return vec3(xy, 0.f); }
+vec3 vec3yz(float y, float z) { return vec3(0.f, y, z); } vec3 vec3yz(vec2 yz) { return vec3(0.f, yz); }
+vec3 vec3xz(float x, float z) { return vec3(x, 0.f, z); } vec3 vec3xz(vec2 xz) { return vec3(xz.x, 0.f, xz.y); }
+
 vec3 vec3rand() { return { util::frand(), util::frand(), util::frand() }; }
