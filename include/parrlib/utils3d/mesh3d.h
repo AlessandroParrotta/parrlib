@@ -16,7 +16,7 @@ public:
 	Mesh3D(VAO const& vao);
 	Mesh3D(const char* fileName);
 
-	void draw(mat4 const& proj, mat4 const& tr); //draws the mesh (a shader must be used previous to this call)
+	void draw(); //draws the mesh (a shader must be used previous to this call)
 	void drawDefaultShader(mat4 const& proj, mat4 const& tr); //draws with a default set shader (will override any shader previously used)
 
 	bool null();

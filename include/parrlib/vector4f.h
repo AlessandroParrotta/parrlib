@@ -227,6 +227,8 @@ namespace vColor4f {
 	extern Vector4f purple;
 	extern Vector4f magenta;
 	extern Vector4f gray;
+
+	Vector4f rand();
 }
 
 typedef Vector4f vec4;

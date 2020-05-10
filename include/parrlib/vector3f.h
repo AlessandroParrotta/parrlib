@@ -107,6 +107,8 @@ namespace vColor3f {
 	extern Vector3f purple;
 	extern Vector3f magenta;
 	extern Vector3f gray;
+
+	Vector3f rand();
 }
 
 typedef Vector3f vec3;

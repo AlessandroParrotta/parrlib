@@ -70,7 +70,6 @@ std::vector<std::string> Shader::getSourceCodes(std::vector<std::string> const& 
 	std::vector<std::string> sources;
 	for (int i = 0; i < shaders.size(); i++) {
 		sources.push_back(readShader(shaders[i]));
-		//std::cout << "read shader " << sources.back() << "\n";
 	}
 	return sources;
 }
@@ -126,7 +125,7 @@ GLuint Shader::createProgram(std::vector<GLuint> const& shaders) {
 GLint Shader::getLocation(std::string const& str) {
 	if (uniforms.find(str) == uniforms.end()) {
 		uniforms[str] = glGetUniformLocation(program, str.c_str());
-		if (uniforms[str] == -1) { std::cout << "shader " << program << ": uniform " << str << " not found!\n"; }
+		if (uniforms[str] == -1) { std::cout << "shader " << program << ": uniform '" << str << "' not found (or has been optimized away)!\n"; }
 	}
 	return uniforms[str];
 }

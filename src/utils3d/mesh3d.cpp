@@ -9,7 +9,7 @@ Mesh3D::Mesh3D(geom3::geommesh3 const& m) {
 Mesh3D::Mesh3D(VAO const& vao) { this->vao = vao; }
 Mesh3D::Mesh3D(const char* fileName) : Mesh3D(geom3::geommesh3(fileName)) {}
 
-void Mesh3D::draw(mat4 const& proj, mat4 const& tr) {
+void Mesh3D::draw() {
 	vao.draw();
 }
 
@@ -25,7 +25,7 @@ void Mesh3D::drawDefaultShader(mat4 const& proj, mat4 const& tr) {
 	sh.setUniform("dirlight", vec3(1.f));
 	//sh.setUniform("dirlight", vec3(1.f));
 
-	draw(proj, tr);
+	draw();
 
 	sh.release();
 }

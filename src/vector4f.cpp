@@ -539,6 +539,8 @@ namespace vColor4f {
 	Vector4f purple(0.5f, 0.0f, 0.5f, 1.0f);
 	Vector4f magenta(1.0f, 0.0f, 1.0f, 1.0f);
 	Vector4f gray(0.5f, 0.5f, 0.5f, 1.0f);
+
+	Vector4f rand() { return { util::frand(),util::frand(),util::frand(), util::frand() }; }
 }
 
 vec4 vec4rand() { return { util::frand(), util::frand(), util::frand(), util::frand() }; }

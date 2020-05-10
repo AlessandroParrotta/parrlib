@@ -328,6 +328,8 @@ namespace vColor3f {
 	Vector3f purple(0.5f, 0.0f, 0.5f);
 	Vector3f magenta(1.0f, 0.0f, 1.0f);
 	Vector3f gray(0.5f, 0.5f, 0.5f);
+
+	Vector3f rand() { return { util::frand(),util::frand(),util::frand() }; }
 }
 
 vec3 vec3x(float x) { return vec3(x, 0.f, 0.f); }
