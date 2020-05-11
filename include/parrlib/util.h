@@ -16,8 +16,6 @@
 
 #include "matrix3f.h"
 
-#define PI 3.141592653589793238463f
-
 class FrameBufferObject;
 
 namespace util {

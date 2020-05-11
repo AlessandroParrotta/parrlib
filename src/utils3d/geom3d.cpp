@@ -1,6 +1,7 @@
 #include <parrlib/utils3d/geom3d.h>
 
 #include <parrlib/vector3f.h>
+#include <parrlib/stringutils.h>
 
 namespace geom3D {
 
@@ -78,7 +79,7 @@ namespace geom3D {
 		idx.reserve(iters);
 
 		for (int i = 0; i < iters; i++) {
-			float theta = (float)i / (float)iters * M_PI;
+			float theta = (float)i / (float)iters * cst::PI;
 			pos.push_back(vec3(sinf(theta),cosf(theta),0.f));
 			norm.push_back(vec3z(-1.f)); col.push_back(1.f); 
 			uv.push_back(1.f); //TODO: fix uv, and idx
@@ -176,7 +177,7 @@ namespace geom3D {
 
 	vec4 randCol() { return { util::frand(), util::frand(), util::frand(), 1.f }; }
 
-	void addNodeMeshes(aiMaterial** mats, aiMesh** meshList, aiNode* n, geom3::geommesh3& gm) {
+	void addNodeMeshes(const char* fileName, aiMaterial** mats, aiMesh** meshList, aiNode* n, geom3::geommesh3& gm) {
 		if (!meshList || !n) return;
 
 		aiMatrix4x4 aitr = n->mTransformation;
@@ -192,8 +193,8 @@ namespace geom3D {
 			if (mats[m->mMaterialIndex]->GetTextureCount(aiTextureType::aiTextureType_DIFFUSE) > 0) {
 				aiString tpath;
 				aiReturn tex = mats[m->mMaterialIndex]->GetTexture(aiTextureType::aiTextureType_DIFFUSE, 0, &tpath, 0, 0, 0, 0, 0);
-				tgm.mat.texpaths.push_back(tpath.C_Str());
-				std::cout << "node contains texture " << tpath.C_Str() << "\n";
+				tgm.mat.texpaths.push_back(stru::splitFilePath(fileName)[0] + tpath.C_Str());
+				std::cout << "node contains texture " << (stru::splitFilePath(fileName)[0] + tpath.C_Str()) << "\n";
 			}
 
 			for (int i = 0; i < m->mNumVertices; i++) {
@@ -219,7 +220,7 @@ namespace geom3D {
 		}
 
 		for (int i = 0; i < n->mNumChildren; i++) {
-			addNodeMeshes(mats, meshList, n->mChildren[i], gm);
+			addNodeMeshes(fileName, mats, meshList, n->mChildren[i], gm);
 		}
 	}
 
@@ -230,7 +231,7 @@ namespace geom3D {
 		const aiScene* sc = imp.ReadFile(fileName, aiProcess_Triangulate);
 		if (!sc) std::cout << "could not load scene!\n"; 
 		else {
-			addNodeMeshes(sc->mMaterials, sc->mMeshes, sc->mRootNode, rm);
+			addNodeMeshes(fileName, sc->mMaterials, sc->mMeshes, sc->mRootNode, rm);
 		}
 
 		return rm;

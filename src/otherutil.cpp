@@ -88,7 +88,7 @@ namespace otherutil {
 
 	float getDegDif(vec2 v0, vec2 v1) {
 		if (v0 == v1) return 0.f;
-		return ((atan2(v1.y, v1.x) - atan2(v0.y, v0.x)) * 180.f) / M_PI + 180.f; // to degrees
+		return ((atan2(v1.y, v1.x) - atan2(v0.y, v0.x)) * 180.f) / cst::PI + 180.f; // to degrees
 	}
 
 	float getDeg(vec2 v0) { return getDegDif(v2ax::fwv2, v0); }

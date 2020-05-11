@@ -12,56 +12,63 @@ class Quaternion
 public:
 	float x, y, z, w;
 
-	Quaternion operator* (const Quaternion &q);
+	Quaternion operator* (const Quaternion &q) const;
 	//Quaternion operator* (const Vector3f &v);
+	Vector3f operator* (const Vector3f &v) const;
 
-	Vector3f operator* (const Vector3f &v);
+	Quaternion operator+ (const Quaternion &q) const;
+	Quaternion& operator*= (const Quaternion &q);
 
-	Quaternion operator+ (const Quaternion &q);
+	mat4 operator*(mat4 const& m) const;
 
-	Quaternion operator*= (const Quaternion &q);
+	Quaternion inverse() const;
+	Quaternion scale(float s) const;
 
-	Quaternion inverse();
+	float getTheta(float angle) const;
+	float magnitude() const;
 
-	Quaternion scale(float s);
+	Quaternion normalized() const;
+	Quaternion conjugate() const;
 
-	float getTheta(float angle);
-	float magnitude();
+	Vector3f direction() const;
 
-	Quaternion normalized();
-	Quaternion conjugate();
+	Quaternion fromMatrix(Matrix4f mat) const;
+	Matrix4f toMatrix() const;
 
-	Vector3f direction();
+	Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle) const;
+	Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up) const;
 
-	Quaternion fromMatrix(Matrix4f mat);
-	Matrix4f toMatrix();
-
-	Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle);
-	Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up);
-
-	Quaternion fromEuler(float x, float y, float z);
-	Vector3f toEuler();
+	Quaternion fromEuler(float x, float y, float z) const;
+	Vector3f toEuler() const;
 
 	void setX(float angle);
 	void setY(float angle);
 	void setZ(float angle);
 
-	float getX();
-	float getY();
-	float getZ();
+	float getX() const;
+	float getY() const;
+	float getZ() const;
 
-	float getAngle();
-	Vector3f getAxis();
+	float getAngle() const;
+	Vector3f getAxis() const;
 
-	std::string toStringRadians();
-	std::string toString();
+	std::string toStringRadians() const;
+	std::string toString() const;
 
 	Quaternion();
-	Quaternion(Vector3f v);
-	Quaternion(Vector3f axis, float angle);
-	Quaternion(float x, float y, float z);
+	Quaternion(vec3 const& v);
+	Quaternion(float angle, vec3 const& axis);
 	Quaternion(float x, float y, float z, float w);
 
 	~Quaternion();
 };
 
+mat4 operator*(mat4 const& m, Quaternion const& q);
+
+std::ostream& operator<<(std::ostream& os, Quaternion const& q);
+std::wostream& operator<<(std::wostream& os, Quaternion const& q);
+
+typedef Quaternion quat;
+
+
+//a quaternion can also be interpreted as the rotation part of a matrix

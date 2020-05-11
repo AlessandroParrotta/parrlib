@@ -15,6 +15,8 @@
 #include "matrix4f.h"
 #include "quaternion.h"
 
+#include "utils3d/camera3d.h"
+
 #include "context.h"
 #include "constants.h"
 

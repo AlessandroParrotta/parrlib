@@ -14,11 +14,11 @@ namespace util {
 	bool tex2denabled = false;
 
 	float toRadians(float degrees) {
-		return (degrees * PI) / 180.0f;
+		return (degrees * cst::PI) / 180.0f;
 	}
 
 	float toDegrees(float radians) {
-		return (radians * 180.0f) / PI;
+		return (radians * 180.0f) / cst::PI;
 	}
 
 	Vector2f camPos;

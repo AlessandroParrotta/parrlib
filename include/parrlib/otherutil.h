@@ -1,6 +1,5 @@
 #pragma once
 
-#define _USE_MATH_DEFINES 
 #include <math.h>
 #include <vector>
 #include <string>
@@ -13,6 +12,7 @@
 
 #include "vector3f.h"
 #include "time.h"
+#include <parrlib/constants.h>
 
 class Vector2f;
 class Vector3f;
@@ -99,8 +99,8 @@ namespace otherutil{
 	vec2 getPointLinesMeet(vec2 l1s, vec2 l1e, vec2 l2s, vec2 l2e);
 
 	//inline funcs must always be in the header file
-	inline float toRadians(const float& degrees) { return (degrees * (float)M_PI) / 180.0f; }
-	inline float toDegrees(const float& radians) { return (radians * 180.0f) / (float)M_PI; }
+	inline float toRadians(const float& degrees) { return (degrees * cst::PI) / 180.0f; }
+	inline float toDegrees(const float& radians) { return (radians * 180.0f) / cst::PI; }
 
 	inline float randomInterval(const float& low, const float& high) {
 		return low + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (high - low)));

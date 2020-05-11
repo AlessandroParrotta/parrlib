@@ -1,6 +1,6 @@
 #include <parrlib/Quaternion.h>
 
-Quaternion Quaternion::operator* (const Quaternion &q) {
+Quaternion Quaternion::operator* (const Quaternion &q) const {
 	float nW = w * q.w - x * q.x - y * q.y - z * q.z;
 	float nX = x * q.w + w * q.x + y * q.z - z * q.y;
 	float nY = y * q.w + w * q.y + z * q.x - x * q.z;
@@ -9,9 +9,11 @@ Quaternion Quaternion::operator* (const Quaternion &q) {
 	return Quaternion(nX, nY, nZ, nW);
 }
 
-Quaternion Quaternion::operator+ (const Quaternion &q) {
+Quaternion Quaternion::operator+ (const Quaternion &q) const {
 	return Quaternion(x+q.x, y+q.y, z+q.z, w+q.w);
 }
+
+mat4 Quaternion::operator*(mat4 const& m) const { return toMatrix() * m; }
 
 //Quaternion Quaternion::operator* (const Vector3f &v) {
 //	float nW = -x * v.x - y * v.y - z * v.z;
@@ -22,7 +24,7 @@ Quaternion Quaternion::operator+ (const Quaternion &q) {
 //	return Quaternion(nX, nY, nZ, nW);
 //}
 
-Vector3f Quaternion::operator*(const Vector3f &v) {
+Vector3f Quaternion::operator*(const Vector3f &v) const {
 	float num = x * 2.0f;
 	float num2 = y * 2.0f;
 	float num3 = z * 2.0f;
@@ -43,7 +45,7 @@ Vector3f Quaternion::operator*(const Vector3f &v) {
 	return result;
 }
 
-Quaternion Quaternion::operator*= (const Quaternion &q) {
+Quaternion& Quaternion::operator*= (const Quaternion &q) {
 	float nW = w * q.w - x * q.x - y * q.y - z * q.z;
 	float nX = x * q.w + w * q.x + y * q.z - z * q.y;
 	float nY = y * q.w + w * q.y + z * q.x - x * q.z;
@@ -61,50 +63,43 @@ Quaternion Quaternion::operator*= (const Quaternion &q) {
 //	return Quaternion(1.0f/x, 1.0f/y, 1.0f/z, 1.0f/w);
 //}
 
-Quaternion Quaternion::scale(float s) {
+Quaternion Quaternion::scale(float s) const {
 	return Quaternion(x*s, y*s, z*s, w*s);
 }
 
-Quaternion Quaternion::inverse() {
+Quaternion Quaternion::inverse() const {
 	return conjugate().scale(1.0f/(x*x + y*y + z*z + w*w));
 }
 
-float Quaternion::getTheta(float angle) {
+float Quaternion::getTheta(float angle) const {
 	return util::toRadians(angle);
 }
 
-float Quaternion::magnitude() {
+float Quaternion::magnitude() const {
 	return sqrt((x*x) + (y*y) + (z*z) + (w*w));
 }
 
 
-Quaternion Quaternion::normalized() {
+Quaternion Quaternion::normalized() const {
 	float magnitude2 = magnitude();
-
-	x /= magnitude2;
-	y /= magnitude2;
-	z /= magnitude2;
-	w /= magnitude2;
-
-	return Quaternion(x, z, y, w);
+	return Quaternion(x / magnitude2, y / magnitude2, z / magnitude2, w / magnitude2);
 }
 
 //Quaternion Quaternion::conjugate() {
 //	return Quaternion(-x, -y, -z -w);
 //}
 
-Quaternion Quaternion::conjugate() {
+Quaternion Quaternion::conjugate() const {
 	return Quaternion(-x, -y, -z, w);
 }
 
-Vector3f Quaternion::direction() {
-	Quaternion t = Quaternion(this->x, this->y, this->z, this->w);
-	Quaternion q = t*Vector3f(0.0f,0.0f,1.0f);
+Vector3f Quaternion::direction() const {
+	Quaternion q = *this*Vector3f(0.0f,0.0f,1.0f);
 
 	return Vector3f(q.x, q.y, q.z).normalized();
 }
 
-Quaternion Quaternion::fromMatrix(Matrix4f mat) {
+Quaternion Quaternion::fromMatrix(Matrix4f mat) const {
 	Quaternion q;
 
 	float trace = mat.matrix[0][0] + mat.matrix[1][1] + mat.matrix[2][2]; // I removed + 1.0f; see discussion with Ethan
@@ -142,7 +137,7 @@ Quaternion Quaternion::fromMatrix(Matrix4f mat) {
 	return q;
 }
 
-Matrix4f Quaternion::toMatrix() {
+Matrix4f Quaternion::toMatrix() const {
 	Matrix4f mat;
 
 	mat.setupRotation(0.0f, 0.0f, 0.0f);
@@ -176,7 +171,7 @@ Matrix4f Quaternion::toMatrix() {
 }
 
 // just in case you need that function also
-Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle){
+Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle) const {
 	float halfAngle = angle * 0.5f;
 	float s = (float)sin(halfAngle);
 	Quaternion q;
@@ -187,27 +182,27 @@ Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle){
 	return q;
 }
 
-Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up){
-	Vector3f forward = Vector3f(0.0f, 0.0f, 1.0f);
-	Vector3f forwardVector = (destPoint - sourcePoint).normalized();
+Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up) const {
+	vec3 forward = vec3(0.f, 0.f, 1.f);
+	vec3 forwardVector = (destPoint - sourcePoint).normalized();
 
 	float dot = forward.dot(forwardVector);
 
-	if (abs(dot - (-1.0f)) < 0.000001f){
-		return Quaternion(up.x, up.y, up.z, 3.1415926535897932f);
+	if (abs(dot - (-1.f)) < 0.000001f){
+		return Quaternion(3.1415926535897932f, up);
 	}
-	if (abs(dot - (1.0f)) < 0.000001f){
-		return Quaternion(Vector3f(0.0f,0.0f,0.0f),1.0f);
+	if (abs(dot - (1.f)) < 0.000001f){
+		return Quaternion(1.0f, 0.f);
 	}
 
 	float rotAngle = (float)acos(dot);
-	Vector3f rotAxis = forward.cross(forwardVector);
+	vec3 rotAxis = forward.cross(forwardVector);
 	rotAxis = rotAxis.normalized();
 
 	return createFromAxisAngle(rotAxis, rotAngle);
 }
 
-Quaternion Quaternion::fromEuler(float x, float y, float z) {
+Quaternion Quaternion::fromEuler(float x, float y, float z) const {
 	/*float c1 = cos(x / 2.0f);
 	float s1 = sin(x / 2.0f);
 	float c2 = cos(y / 2.0f);
@@ -241,7 +236,7 @@ Quaternion Quaternion::fromEuler(float x, float y, float z) {
 	
 }
 
-Vector3f Quaternion::toEuler() {
+Vector3f Quaternion::toEuler()  const {
 	Vector3f v;
 
 	float sqw = w*w;
@@ -252,13 +247,13 @@ Vector3f Quaternion::toEuler() {
 	float test = x*y + z*w;
 	if (test > 0.499*unit) { // singularity at north pole
 		v.x = 2.0f * atan2(x, w);
-		v.y = PI / 2.0f;
+		v.y = cst::PI / 2.0f;
 		v.z = 0.0f;
 		return v;
 	}
 	else if (test < -0.499*unit) { // singularity at south pole
 		v.x = -2.0f * atan2(x, w);
-		v.y = -PI / 2.0f;
+		v.y = -cst::PI / 2.0f;
 		v.z = 0.0f;
 		return v;
 	}
@@ -283,53 +278,55 @@ void Quaternion::setZ(float angle) {
 }
 
 
-float Quaternion::getX() {
+float Quaternion::getX()  const {
 	return util::toDegrees(x);
 }
 
-float Quaternion::getY() {
+float Quaternion::getY() const {
 	return util::toDegrees(y);
 }
 
-float Quaternion::getZ() {
+float Quaternion::getZ() const {
 	return util::toDegrees(z);
 }
 
 
-float Quaternion::getAngle() {
-	if (w > 1.0f) *this = normalized();
-	return 2.0f * acos(w);
+float Quaternion::getAngle() const {
+	Quaternion norm = *this;
+	if (w > 1.0f) norm = normalized();
+	return 2.0f * acos(norm.w);
 }
 
-Vector3f Quaternion::getAxis() {
-	if (w > 1.0f) *this = normalized();
+Vector3f Quaternion::getAxis() const {
+	Quaternion norm = *this;
+	if(w > 1.0f) norm = normalized();
 
 	Vector3f v;
 
 	double s = sqrt(1.0f - w*w); // assuming quaternion normalised then w is less than 1, so term always positive.
 	if (s < 0.001f) { // test to avoid divide by zero, s is always positive due to sqrt
 	  // if s close to zero then direction of axis not important
-		v.x = x; // if it is important that axis is normalised then replace with x=1; y=z=0;
-		v.y = y;
-		z = z;
+		v.x = norm.x; // if it is important that axis is normalised then replace with x=1; y=z=0;
+		v.y = norm.y;
+		v.z = norm.z;
 	}
 	else {
-		v.x = x / s; // normalise axis
-		v.y = y / s;
-		v.z = z / s;
+		v.x = norm.x / s; // normalise axis
+		v.y = norm.y / s;
+		v.z = norm.z / s;
 	}
 
 	return v;
 }
 
 
-std::string Quaternion::toStringRadians() {
+std::string Quaternion::toStringRadians() const {
 	std::ostringstream ss;
 	ss << "(" << x << ", " << y << ", " << z << ", " << w << ")";
 	return ss.str();
 }
 
-std::string Quaternion::toString() {
+std::string Quaternion::toString() const {
 	std::ostringstream ss;
 	ss << "(" << getX() << ", " << getY() << ", " << getZ() << ", " << w << ")";
 	return ss.str();
@@ -340,25 +337,18 @@ Quaternion::Quaternion(){
 
 }
 
-Quaternion::Quaternion(Vector3f v) {
+Quaternion::Quaternion(vec3 const& v) {
 	this->x = getTheta(v.x);
 	this->y = getTheta(v.y);
 	this->z = getTheta(v.z);
 	this->w = 1.0f;
 }
 
-Quaternion::Quaternion(Vector3f axis, float angle) {
+Quaternion::Quaternion(float angle, vec3 const& axis) {
 	x = axis.x * sin(angle / 2.0f);
 	y = axis.y * sin(angle / 2.0f);
 	z = axis.z * sin(angle / 2.0f);
 	w = cos(angle / 2.0f);
-}
-
-Quaternion::Quaternion(float x, float y, float z) {
-	this->x = getTheta(x);
-	this->y = getTheta(y);
-	this->z = getTheta(z);
-	this->w = 1.0f;
 }
 
 Quaternion::Quaternion(float x, float y, float z, float w) {
@@ -371,4 +361,18 @@ Quaternion::Quaternion(float x, float y, float z, float w) {
 
 Quaternion::~Quaternion(){
 
+}
+
+mat4 operator*(mat4 const& m, Quaternion const& q) {
+	return m * q.toMatrix();
+}
+
+std::ostream& operator<<(std::ostream& os, Quaternion const& q) {
+	os << "(" << q.x << ", " << q.y << ", " << q.z << ", " << q.w << ")";
+	return os;
+}
+
+std::wostream& operator<<(std::wostream& os, Quaternion const& q) {
+	os << L"(" << q.x << L", " << q.y << L", " << q.z << L", " << q.w << L")";
+	return os;
 }

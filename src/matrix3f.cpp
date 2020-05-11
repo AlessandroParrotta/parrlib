@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <parrlib/stringutils.h>
+#include <parrlib/constants.h>
 
 Matrix3f::Matrix3f() {}
 
@@ -162,7 +163,7 @@ namespace pmat3 {
 	}
 
 	mat3 rotate(float angle) {
-		angle = angle * M_PI / 180.f;  //convert to radians
+		angle = angle * cst::PI / 180.f;  //convert to radians
 		mat3 m = 0.f;
 		m[0][0] = cos(angle); m[0][1] = -sin(angle);
 		m[1][0] = sin(angle); m[1][1] = cos(angle);
@@ -191,7 +192,7 @@ namespace pmat3 {
 		vec2 dir = (target - eye).normalized();
 		float dot = eye.x * target.x + eye.y * target.y;
 		float det = eye.x * target.y - eye.y * target.x;
-		float angle = (atan2f(dir.y, dir.x) * 180.f) / M_PI; // to degrees
+		float angle = (atan2f(dir.y, dir.x) * 180.f) / cst::PI; // to degrees
 		return rotate(angle);
 	}
 

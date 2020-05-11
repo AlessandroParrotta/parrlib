@@ -2,6 +2,7 @@
 
 #include <parrlib/OtherUtil.h>
 #include <parrlib/stringutils.h>
+#include <parrlib/constants.h>
 
 //Matrix4f Matrix4f::identity() {
 //	float matrix[4][4];
@@ -349,7 +350,7 @@ void Matrix4f::setupRotation(float x, float y, float z) {
 void Matrix4f::setupRotationAxis(float angle, vec3 const& axis) {
 	float u = axis.x, v = axis.y, w = axis.z;
 	float L = (u * u + v * v + w * w);
-	angle = angle * M_PI / 180.0; //converting to radian value
+	angle = angle * cst::PI / 180.0; //converting to radian value
 	float u2 = u * u;
 	float v2 = v * v;
 	float w2 = w * w;
@@ -395,7 +396,7 @@ void Matrix4f::setupScale(Vector3f const& scale) {
 }
 
 void Matrix4f::setupPerspective(float fov, float aspect, float znear, float zfar) {
-	float D2R = M_PI / 180.0f;
+	float D2R = cst::PI / 180.0f;
 	float yScale = 1.0f / tan(D2R * fov / 2.0f);
 	float xScale = yScale / aspect;
 	float nearmfar = znear - zfar;

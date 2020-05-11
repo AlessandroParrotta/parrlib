@@ -5,6 +5,7 @@
 
 namespace constants {
 	extern float textSizeThreshold;
+	extern const double PI;
 
 	void res(vec2 r);
 

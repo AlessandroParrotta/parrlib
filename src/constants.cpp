@@ -2,10 +2,9 @@
 
 #include <parrlib/Vector2f.h>
 
-#include <cmath>
-
 namespace constants {
 	float textSizeThreshold = 0.03f;
+	const double PI = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;
 
 	vec2 dres = 0.f;
 	void res(vec2 r) { dres = r; }

@@ -4,7 +4,7 @@ Mesh3D::Mesh3D() {}
 
 Mesh3D::Mesh3D(geom3::geommesh3 const& m) {
 	vao = { { { m.pos, 3 }, { m.norm, 3 }, { m.col, 4 }, { m.uv, 2 } }, { { m.idx } } };
-	if (m.mat.texpaths.size() > 0) tex = m.mat.texpaths[0];
+	if (m.mat.texpaths.size() > 0) { tex = m.mat.texpaths[0]; }
 }
 Mesh3D::Mesh3D(VAO const& vao) { this->vao = vao; }
 Mesh3D::Mesh3D(const char* fileName) : Mesh3D(geom3::geommesh3(fileName)) {}
