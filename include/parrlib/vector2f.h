@@ -49,6 +49,9 @@ public:
 	Vector2f maxed(Vector2f val) const;		//returns { max(x, val.x), max(y, val.y) }
 	Vector2f maxed(float val) const;		//returns { max(x, val), max(y, val) }
 
+	Vector2f floored() const;
+	Vector2f ceiled() const;
+
 	Vector2f clamped(float min, float max) const;
 	Vector2f clamped(Vector2f range) const;
 	Vector2f clamped(Vector2f rangex, Vector2f rangey) const;

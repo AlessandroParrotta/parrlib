@@ -160,6 +160,9 @@ Vector2f Vector2f::minned(float val) const { return minned(Vector2f(val)); }
 Vector2f Vector2f::maxed(Vector2f val) const { return Vector2f(std::fmax(x, val.x), std::fmax(y, val.y)); }
 Vector2f Vector2f::maxed(float val) const { return maxed(Vector2f(val)); }
 
+Vector2f Vector2f::floored() const { return { std::floorf(x), std::floorf(y) }; }
+Vector2f Vector2f::ceiled() const { return { std::ceilf(x), std::ceilf(y) }; }
+
 Vector2f Vector2f::clamped(float min, float max) const {
 	return Vector2f(
 		std::fmin(std::fmax(x, min), max),
