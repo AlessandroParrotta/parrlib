@@ -7,17 +7,25 @@ project(parrlib)
 
 file(GLOB_RECURSE SOURCE_FILES
                     ${CMAKE_SOURCE_DIR}/src/*.c
-                    ${CMAKE_SOURCE_DIR}/src/*.cpp)
+                    ${CMAKE_SOURCE_DIR}/src/**/*.c
+                    ${CMAKE_SOURCE_DIR}/src/*.cpp
+                    ${CMAKE_SOURCE_DIR}/src/**/*.cpp)
 
 file(GLOB_RECURSE HEADER_FILES
                     ${CMAKE_SOURCE_DIR}/src/*.h
+                    ${CMAKE_SOURCE_DIR}/src/**/*.h
                     ${CMAKE_SOURCE_DIR}/src/*.hpp
+                    ${CMAKE_SOURCE_DIR}/src/**/*.hpp
 					
 					${CMAKE_SOURCE_DIR}/include/*.h
+					${CMAKE_SOURCE_DIR}/include/**/*.h
                     ${CMAKE_SOURCE_DIR}/include/*.hpp
+                    ${CMAKE_SOURCE_DIR}/include/**/*.hpp
 					
 					${CMAKE_SOURCE_DIR}/thirdparty/include/*.h
-					${CMAKE_SOURCE_DIR}/thirdparty/include/*.hpp)
+					${CMAKE_SOURCE_DIR}/thirdparty/include/**/*.h
+					${CMAKE_SOURCE_DIR}/thirdparty/include/*.hpp
+					${CMAKE_SOURCE_DIR}/thirdparty/include/**/*.hpp)
 
 # Scan through resource folder for updated files and copy if none existing or changed
 file (GLOB_RECURSE resources "resources/*.*")

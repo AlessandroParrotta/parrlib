@@ -1,5 +1,6 @@
 #pragma once
 
+#include <parrlib/input.h>
 #include <parrlib/vector3f.h>
 #include <parrlib/quaternion.h>
 #include <parrlib/matrix4f.h>

@@ -1,5 +1,7 @@
 #include <parrlib/utils3d/camera3d.h>
 
+#include <parrlib/debug.h>
+
 void Camera3D::input() {
 	int sw = input::getMouseScrollWheel();
 	if (sw > 0) speed *= 2.f;
@@ -15,6 +17,8 @@ void Camera3D::input() {
 			quat(-sens.y, v3ax::riv3) *
 			quat((input::getKey(GLFW_KEY_Q) ? sens.z : input::getKey(GLFW_KEY_E) ? -sens.z : 0.f), v3ax::fwv3);
 	}
+
+	tr = rot * pmat4::translate(-pos);
 }
 
 vec3 Camera3D::fw() const { return tr.transposed() * -v3ax::fwv3; }
