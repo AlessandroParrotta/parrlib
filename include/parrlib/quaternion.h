@@ -19,9 +19,11 @@ public:
 	Quaternion operator+ (const Quaternion &q) const;
 	Quaternion& operator*= (const Quaternion &q);
 
+	Quaternion operator/(float f) const;
+
 	mat4 operator*(mat4 const& m) const;
 
-	Quaternion inverse() const;
+	Quaternion inverted() const;
 	Quaternion scale(float s) const;
 
 	float getTheta(float angle) const;
@@ -32,13 +34,9 @@ public:
 
 	Vector3f direction() const;
 
-	Quaternion fromMatrix(Matrix4f mat) const;
 	Matrix4f toMatrix() const;
 
-	Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle) const;
-	Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up) const;
-
-	Quaternion fromEuler(float x, float y, float z) const;
+	Quaternion fromEuler(vec3 const& euler) const;
 	Vector3f toEuler() const;
 
 	void setX(float angle);
@@ -59,6 +57,7 @@ public:
 	Quaternion(vec3 const& v);
 	Quaternion(float angle, vec3 const& axis);
 	Quaternion(float x, float y, float z, float w);
+	Quaternion(float f);
 
 	~Quaternion();
 };
@@ -69,6 +68,13 @@ std::ostream& operator<<(std::ostream& os, Quaternion const& q);
 std::wostream& operator<<(std::wostream& os, Quaternion const& q);
 
 typedef Quaternion quat;
+
+namespace pquat {
+	const quat iden = { 0.f,0.f,0.f,1.f };	//identity quaternion
+
+	Quaternion fromMatrix(Matrix4f mat);
+	Quaternion lookAt(vec3 const& eye, vec3 const& target, vec3 const& up);
+}
 
 
 //a quaternion can also be interpreted as the rotation part of a matrix

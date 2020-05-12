@@ -8,7 +8,7 @@
 class Camera3D {
 public:
 	vec3 pos = 0.f;
-	quat rot = 1.f;
+	quat rot = pquat::iden;
 	mat4 tr = 1.f;
 
 	float speed = 1.f;

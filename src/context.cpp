@@ -18,6 +18,7 @@
 
 namespace Context {
 
+	bool initialized = false;
 	std::vector<std::string> args;
 
 	std::string title = "OpenGL Parrlib Application";
@@ -76,18 +77,21 @@ namespace Context {
 	//when glfwgetwindowmonitor is called, framebuffercallback is invoked and if left unchecked it'll 
 	//cause an infinite recursive call, that's the reason for this variable
 	bool changingFullscreen = false; 
-	void setFullscreen(bool fullscreen) {
-		if (prc::fullscreen == fullscreen || changingFullscreen)	return;
+	void setFullscreenPriv(bool fullscreen) {
+		if (!initialized || changingFullscreen)	return;
 		changingFullscreen = true;
 		prc::fullscreen = fullscreen;
 
-		if (glfwGetWindowMonitor(glfwwindow)) {		//if it's fullscreen
+		std::cout << "setting fullscreen " << fullscreen << "\n";
+
+		GLFWmonitor* mnt = glfwGetWindowMonitor(glfwwindow);
+		if (!fullscreen && mnt) {		//if it's not fullscreen
 			glfwSetWindowMonitor(glfwwindow, NULL,
 				wndpos.x, wndpos.y,
 				wndsize.x, wndsize.y,
-				0);
+			0);
 		}
-		else {										//if it's not fullscreen
+		else if(fullscreen && !mnt) {										//if it's fullscreen
 			glfwmonitor = glfwGetPrimaryMonitor();
 			if (glfwmonitor) {
 				const GLFWvidmode* mode = glfwGetVideoMode(glfwmonitor);
@@ -101,11 +105,41 @@ namespace Context {
 				wndsize = vec2(wx, wy);
 			}
 		}
+		
+		//if (glfwGetWindowMonitor(glfwwindow)) {		//if it's fullscreen
+		//	glfwSetWindowMonitor(glfwwindow, NULL,
+		//		wndpos.x, wndpos.y,
+		//		wndsize.x, wndsize.y,
+		//		0);
+		//}
+		//else {										//if it's not fullscreen
+		//	glfwmonitor = glfwGetPrimaryMonitor();
+		//	if (glfwmonitor) {
+		//		const GLFWvidmode* mode = glfwGetVideoMode(glfwmonitor);
+		//		int px, py, wx, wy;
+		//		glfwGetWindowPos(glfwwindow, &px, &py);
+		//		glfwGetWindowSize(glfwwindow, &wx, &wy);
+		//		glfwSetWindowMonitor(glfwwindow, glfwmonitor,
+		//			0, 0, mode->width, mode->height,
+		//			mode->refreshRate);
+		//		wndpos = vec2(px, py);
+		//		wndsize = vec2(wx, wy);
+		//	}
+		//}
 
 		setVSync(vSync);
 
 		changingFullscreen = false;
 	}
+
+	void setFullscreen(bool fullscreen) {
+		if (initialized) {
+			std::cout << "set priv! " << fullscreen << "\n";
+			setFullscreenPriv(fullscreen);
+		}
+		else prc::fullscreen = fullscreen;
+	}
+	bool getFullscreen() { return fullscreen; }
 
 	void startresize() {
 		funcs[FSTARTRESIZE]();
@@ -149,7 +183,7 @@ namespace Context {
 
 		input::processInput(glfwwindow);
 
-		if (input::getKey(GLFW_KEY_LEFT_ALT) && input::getKeyDown(GLFW_KEY_ENTER)) setFullscreen(!fullscreen);
+		if (input::getKey(GLFW_KEY_LEFT_ALT) && input::getKeyDown(GLFW_KEY_ENTER)) setFullscreenPriv(!fullscreen);
 		if (input::getKeyDown(GLFW_KEY_F1)) {
 			debugmenu::enabled = !debugmenu::enabled; 
 
@@ -394,6 +428,8 @@ namespace Context {
 
 		tinit.set(); std::cout << "initialized (" << tinit.getTime() << ")\n";
 
+		initialized = true;
+
 		imui::init();
 		imui::useAtlas("assets/sprites/atlas.png");
 		imui::setTxr("assets/fonts/segoeui.ttf", 32);
@@ -404,6 +440,9 @@ namespace Context {
 		funcs[FINIT]();
 
 		glfwMaximizeWindow(glfwwindow);
+
+		std::cout << "set fullscreen " << fullscreen << "\n";
+		setFullscreenPriv(fullscreen);
 
 		start();
 

@@ -203,7 +203,7 @@ namespace geom3D {
 				aiVector3D uv = m->mTextureCoords[0][i];
 
 				tgm.pushPos(tr * vec3(vert.x, vert.y, vert.z));
-				tgm.pushCol(randCol());
+				tgm.pushCol(1.f); //tgm.pushCol(randCol());
 				tgm.pushNorm(tr.rotation()*-vec3(norm.x, norm.y, norm.z));
 				tgm.pushUv(vec2(uv.x, uv.y));
 			}

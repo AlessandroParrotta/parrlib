@@ -21,7 +21,8 @@
 class TextRendererOld;
 
 namespace Context {
-
+	
+	extern bool initialized;
 	extern double fps;
 
 	extern vec2 wsize; //window size
@@ -40,6 +41,9 @@ namespace Context {
 
 	void setscmode(int sc);
 	int getscmode();
+
+	void setFullscreen(bool fullscreen);
+	bool getFullscreen();
 
 	/*
 		Initializes the main OpenGL context and starts running the application

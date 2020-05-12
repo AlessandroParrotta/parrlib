@@ -1,12 +1,12 @@
 #include <parrlib/Quaternion.h>
 
 Quaternion Quaternion::operator* (const Quaternion &q) const {
-	float nW = w * q.w - x * q.x - y * q.y - z * q.z;
-	float nX = x * q.w + w * q.x + y * q.z - z * q.y;
-	float nY = y * q.w + w * q.y + z * q.x - x * q.z;
-	float nZ = z * q.w + w * q.z + x * q.y - y * q.x;
-
-	return Quaternion(nX, nY, nZ, nW);
+	return Quaternion(
+		x * q.w + w * q.x + y * q.z - z * q.y,
+		y * q.w + w * q.y + z * q.x - x * q.z,
+		z * q.w + w * q.z + x * q.y - y * q.x,
+		w * q.w - x * q.x - y * q.y - z * q.z
+	);
 }
 
 Quaternion Quaternion::operator+ (const Quaternion &q) const {
@@ -46,18 +46,15 @@ Vector3f Quaternion::operator*(const Vector3f &v) const {
 }
 
 Quaternion& Quaternion::operator*= (const Quaternion &q) {
-	float nW = w * q.w - x * q.x - y * q.y - z * q.z;
-	float nX = x * q.w + w * q.x + y * q.z - z * q.y;
-	float nY = y * q.w + w * q.y + z * q.x - x * q.z;
-	float nZ = z * q.w + w * q.z + x * q.y - y * q.x;
-
-	w = nW;
-	x = nX;
-	y = nY;
-	z = nZ;
+	w = w * q.w - x * q.x - y * q.y - z * q.z;
+	x = x * q.w + w * q.x + y * q.z - z * q.y;
+	y = y * q.w + w * q.y + z * q.x - x * q.z;
+	z = z * q.w + w * q.z + x * q.y - y * q.x;
 
 	return *this;
 }
+
+Quaternion Quaternion::operator/(float f) const { return { x/f, y/f, z/f, w/f }; }
 
 //Quaternion Quaternion::inverse() {
 //	return Quaternion(1.0f/x, 1.0f/y, 1.0f/z, 1.0f/w);
@@ -67,8 +64,8 @@ Quaternion Quaternion::scale(float s) const {
 	return Quaternion(x*s, y*s, z*s, w*s);
 }
 
-Quaternion Quaternion::inverse() const {
-	return conjugate().scale(1.0f/(x*x + y*y + z*z + w*w));
+Quaternion Quaternion::inverted() const {
+	return conjugate() / (x*x + y*y + z*z + w*w);
 }
 
 float Quaternion::getTheta(float angle) const {
@@ -97,44 +94,6 @@ Vector3f Quaternion::direction() const {
 	Quaternion q = *this*Vector3f(0.0f,0.0f,1.0f);
 
 	return Vector3f(q.x, q.y, q.z).normalized();
-}
-
-Quaternion Quaternion::fromMatrix(Matrix4f mat) const {
-	Quaternion q;
-
-	float trace = mat.matrix[0][0] + mat.matrix[1][1] + mat.matrix[2][2]; // I removed + 1.0f; see discussion with Ethan
-	if (trace > 0.0f) {// I changed M_EPSILON to 0
-		float s = 0.5f / sqrtf(trace + 1.0f);
-		q.w = 0.25f / s;
-		q.x = (mat.matrix[2][1] - mat.matrix[1][2]) * s;
-		q.y = (mat.matrix[0][2] - mat.matrix[2][0]) * s;
-		q.z = (mat.matrix[1][0] - mat.matrix[0][1]) * s;
-	}
-	else {
-		if (mat.matrix[0][0] > mat.matrix[1][1] && mat.matrix[0][0] > mat.matrix[2][2]) {
-			float s = 2.0f * sqrtf(1.0f + mat.matrix[0][0] - mat.matrix[1][1] - mat.matrix[2][2]);
-			q.w = (mat.matrix[2][1] - mat.matrix[1][2]) / s;
-			q.x = 0.25f * s;
-			q.y = (mat.matrix[0][1] + mat.matrix[1][0]) / s;
-			q.z = (mat.matrix[0][2] + mat.matrix[2][0]) / s;
-		}
-		else if (mat.matrix[1][1] > mat.matrix[2][2]) {
-			float s = 2.0f * sqrtf(1.0f + mat.matrix[1][1] - mat.matrix[0][0] - mat.matrix[2][2]);
-			q.w = (mat.matrix[0][2] - mat.matrix[2][0]) / s;
-			q.x = (mat.matrix[0][1] + mat.matrix[1][0]) / s;
-			q.y = 0.25f * s;
-			q.z = (mat.matrix[1][2] + mat.matrix[2][1]) / s;
-		}
-		else {
-			float s = 2.0f * sqrtf(1.0f + mat.matrix[2][2] - mat.matrix[0][0] - mat.matrix[1][1]);
-			q.w = (mat.matrix[1][0] - mat.matrix[0][1]) / s;
-			q.x = (mat.matrix[0][2] + mat.matrix[2][0]) / s;
-			q.y = (mat.matrix[1][2] + mat.matrix[2][1]) / s;
-			q.z = 0.25f * s;
-		}
-	}
-
-	return q;
 }
 
 Matrix4f Quaternion::toMatrix() const {
@@ -170,39 +129,27 @@ Matrix4f Quaternion::toMatrix() const {
 	return mat;
 }
 
-// just in case you need that function also
-Quaternion Quaternion::createFromAxisAngle(Vector3f axis, float angle) const {
-	float halfAngle = angle * 0.5f;
-	float s = (float)sin(halfAngle);
-	Quaternion q;
-	q.x = axis.x * s;
-	q.y = axis.y * s;
-	q.z = axis.z * s;
-	q.w = (float)cos(halfAngle);
-	return q;
-}
+//Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up) const {
+//	vec3 forward = vec3(0.f, 0.f, 1.f);
+//	vec3 forwardVector = (destPoint - sourcePoint).normalized();
+//
+//	float dot = forward.dot(forwardVector);
+//
+//	if (abs(dot - (-1.f)) < 0.000001f){
+//		return Quaternion(3.1415926535897932f, up);
+//	}
+//	if (abs(dot - (1.f)) < 0.000001f){
+//		return Quaternion(1.0f, 0.f);
+//	}
+//
+//	float rotAngle = (float)acos(dot);
+//	vec3 rotAxis = forward.cross(forwardVector);
+//	rotAxis = rotAxis.normalized();
+//
+//	return createFromAxisAngle(rotAxis, rotAngle);
+//}
 
-Quaternion Quaternion::lookAt(Vector3f sourcePoint, Vector3f destPoint, Vector3f up) const {
-	vec3 forward = vec3(0.f, 0.f, 1.f);
-	vec3 forwardVector = (destPoint - sourcePoint).normalized();
-
-	float dot = forward.dot(forwardVector);
-
-	if (abs(dot - (-1.f)) < 0.000001f){
-		return Quaternion(3.1415926535897932f, up);
-	}
-	if (abs(dot - (1.f)) < 0.000001f){
-		return Quaternion(1.0f, 0.f);
-	}
-
-	float rotAngle = (float)acos(dot);
-	vec3 rotAxis = forward.cross(forwardVector);
-	rotAxis = rotAxis.normalized();
-
-	return createFromAxisAngle(rotAxis, rotAngle);
-}
-
-Quaternion Quaternion::fromEuler(float x, float y, float z) const {
+Quaternion Quaternion::fromEuler(vec3 const& euler) const {
 	/*float c1 = cos(x / 2.0f);
 	float s1 = sin(x / 2.0f);
 	float c2 = cos(y / 2.0f);
@@ -220,12 +167,12 @@ Quaternion Quaternion::fromEuler(float x, float y, float z) const {
 	return q;*/
 
 	// Assuming the angles are in radians.
-	float c1 = cos(x);
-	float s1 = sin(x);
-	float c2 = cos(y);
-	float s2 = sin(y);
-	float c3 = cos(z);
-	float s3 = sin(z);
+	float c1 = cos(euler.x);
+	float s1 = sin(euler.x);
+	float c2 = cos(euler.y);
+	float s2 = sin(euler.y);
+	float c3 = cos(euler.z);
+	float s3 = sin(euler.z);
 	Quaternion q;
 	q.w = sqrt(1.0f + c1 * c2 + c1 * c3 - s1 * s2 * s3 + c2 * c3) / 2.0f;
 	float w4 = (4.0f * q.w);
@@ -358,6 +305,13 @@ Quaternion::Quaternion(float x, float y, float z, float w) {
 	this->w = w;
 }
 
+Quaternion::Quaternion(float f) {
+	this->x = f;
+	this->y = f;
+	this->z = f;
+	this->w = f;
+}
+
 
 Quaternion::~Quaternion(){
 
@@ -375,4 +329,50 @@ std::ostream& operator<<(std::ostream& os, Quaternion const& q) {
 std::wostream& operator<<(std::wostream& os, Quaternion const& q) {
 	os << L"(" << q.x << L", " << q.y << L", " << q.z << L", " << q.w << L")";
 	return os;
+}
+
+namespace pquat {
+	Quaternion fromMatrix(Matrix4f mat) {
+		Quaternion q;
+
+		float trace = mat.matrix[0][0] + mat.matrix[1][1] + mat.matrix[2][2]; // I removed + 1.0f; see discussion with Ethan
+		if (trace > 0.0f) {// I changed M_EPSILON to 0
+			float s = 0.5f / sqrtf(trace + 1.0f);
+			q.w = 0.25f / s;
+			q.x = (mat.matrix[2][1] - mat.matrix[1][2]) * s;
+			q.y = (mat.matrix[0][2] - mat.matrix[2][0]) * s;
+			q.z = (mat.matrix[1][0] - mat.matrix[0][1]) * s;
+		}
+		else {
+			if (mat.matrix[0][0] > mat.matrix[1][1] && mat.matrix[0][0] > mat.matrix[2][2]) {
+				float s = 2.0f * sqrtf(1.0f + mat.matrix[0][0] - mat.matrix[1][1] - mat.matrix[2][2]);
+				q.w = (mat.matrix[2][1] - mat.matrix[1][2]) / s;
+				q.x = 0.25f * s;
+				q.y = (mat.matrix[0][1] + mat.matrix[1][0]) / s;
+				q.z = (mat.matrix[0][2] + mat.matrix[2][0]) / s;
+			}
+			else if (mat.matrix[1][1] > mat.matrix[2][2]) {
+				float s = 2.0f * sqrtf(1.0f + mat.matrix[1][1] - mat.matrix[0][0] - mat.matrix[2][2]);
+				q.w = (mat.matrix[0][2] - mat.matrix[2][0]) / s;
+				q.x = (mat.matrix[0][1] + mat.matrix[1][0]) / s;
+				q.y = 0.25f * s;
+				q.z = (mat.matrix[1][2] + mat.matrix[2][1]) / s;
+			}
+			else {
+				float s = 2.0f * sqrtf(1.0f + mat.matrix[2][2] - mat.matrix[0][0] - mat.matrix[1][1]);
+				q.w = (mat.matrix[1][0] - mat.matrix[0][1]) / s;
+				q.x = (mat.matrix[0][2] + mat.matrix[2][0]) / s;
+				q.y = (mat.matrix[1][2] + mat.matrix[2][1]) / s;
+				q.z = 0.25f * s;
+			}
+		}
+
+		return q;
+	}
+
+	Quaternion lookAt(vec3 const& eye, vec3 const& target, vec3 const& up) {
+		//temporary solution, i just use matrix lookAt which probably is much less efficient than
+		//doing it directly with quaternions TODO
+		return fromMatrix(pmat4::lookAt(eye, target, up));
+	}
 }
