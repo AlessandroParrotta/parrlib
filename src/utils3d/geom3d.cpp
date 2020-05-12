@@ -190,11 +190,18 @@ namespace geom3D {
 			geom3::geommesh3 tgm;
 			tgm.reserve(m->mNumVertices);
 
-			if (mats[m->mMaterialIndex]->GetTextureCount(aiTextureType::aiTextureType_DIFFUSE) > 0) {
+			for (int i = 0; i < mats[m->mMaterialIndex]->GetTextureCount(aiTextureType::aiTextureType_DIFFUSE); i++) {
 				aiString tpath;
-				aiReturn tex = mats[m->mMaterialIndex]->GetTexture(aiTextureType::aiTextureType_DIFFUSE, 0, &tpath, 0, 0, 0, 0, 0);
+				mats[m->mMaterialIndex]->GetTexture(aiTextureType::aiTextureType_DIFFUSE, 0, &tpath, 0, 0, 0, 0, 0);
 				tgm.mat.texpaths.push_back(stru::splitFilePath(fileName)[0] + tpath.C_Str());
-				std::cout << "node contains texture " << (stru::splitFilePath(fileName)[0] + tpath.C_Str()) << "\n";
+				std::cout << "node contains diffuse texture " << (stru::splitFilePath(fileName)[0] + tpath.C_Str()) << "\n";
+			}
+			
+			for (int i = 0; i < mats[m->mMaterialIndex]->GetTextureCount(aiTextureType::aiTextureType_NORMALS); i++) {
+				aiString tpath;
+				mats[m->mMaterialIndex]->GetTexture(aiTextureType::aiTextureType_NORMALS, 0, &tpath, 0, 0, 0, 0, 0);
+				tgm.mat.texpaths.push_back(stru::splitFilePath(fileName)[0] + tpath.C_Str());
+				std::cout << "node contains normal texture " << (stru::splitFilePath(fileName)[0] + tpath.C_Str()) << "\n";
 			}
 
 			for (int i = 0; i < m->mNumVertices; i++) {

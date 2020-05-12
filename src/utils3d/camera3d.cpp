@@ -12,7 +12,7 @@ void Camera3D::input() {
 
 	if (input::getKeyDown(GLFW_KEY_Z)) input::toggleCursorInputMode();
 	if (input::getCursorInputMode() == GLFW_CURSOR_DISABLED) {
-		vec3 sens = vec3(input::getMouseDeltaConst(), .3f) * 6.f * gtime::deltaTime;
+		vec3 sens = vec3(input::getMouseDeltaConst(), .5f) * 6.f * gtime::deltaTime;
 		//rot = pquat::lookAt(pos, 0.f, quat(gtime::time, fw()) * v3ax::upv3);
 		rot *= quat(-sens.x, v3ax::upv3) *
 			quat(-sens.y, v3ax::riv3) *
