@@ -2,7 +2,6 @@
 
 #include <parrlib/Vector4f.h>
 #include <parrlib/stringutils.h>
-#include <parrlib/util.h>
 
 #include <parrlib/OtherUtil.h>
 
@@ -329,7 +328,7 @@ namespace vColor3f {
 	Vector3f magenta(1.0f, 0.0f, 1.0f);
 	Vector3f gray(0.5f, 0.5f, 0.5f);
 
-	Vector3f rand() { return { util::frand(),util::frand(),util::frand() }; }
+	Vector3f rand() { return { outl::frand(),outl::frand(),outl::frand() }; }
 }
 
 vec3 vec3x(float x) { return vec3(x, 0.f, 0.f); }
@@ -340,4 +339,4 @@ vec3 vec3xy(float x, float y) { return vec3(x, y, 0.f); } vec3 vec3xy(vec2 xy) {
 vec3 vec3yz(float y, float z) { return vec3(0.f, y, z); } vec3 vec3yz(vec2 yz) { return vec3(0.f, yz); }
 vec3 vec3xz(float x, float z) { return vec3(x, 0.f, z); } vec3 vec3xz(vec2 xz) { return vec3(xz.x, 0.f, xz.y); }
 
-vec3 vec3rand() { return { util::frand(), util::frand(), util::frand() }; }
+vec3 vec3rand() { return { outl::frand(), outl::frand(), outl::frand() }; }

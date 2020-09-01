@@ -41,6 +41,8 @@ namespace otherutil {
 	float minfabs(float const& f1, float const& f2) { return std::fabs(f1) < std::fabs(f2) ? f1 : f2; }
 	float maxfabs(float const& f1, float const& f2) { return std::fabs(f1) > std::fabs(f2) ? f1 : f2; }
 
+	//float frand() { return (float)rand() / (float)RAND_MAX; }
+
 	//Normalizes any number to an arbitrary range, [-180,180], [0,180] or [0,360]
 	//by assuming the range wraps around when going below min or above max 
 	//https://stackoverflow.com/questions/1628386/normalise-orientation-between-0-and-360

@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <parrlib/stringutils.h>
-#include <parrlib/util.h>
+#include <parrlib/otherutil.h>
 
 Vector4f Vector4f::right() {
 	return Vector4f(1.0f, 0.0f, 0.0f, 0.0f);
@@ -565,7 +565,7 @@ namespace vColor4f {
 	Vector4f magenta(1.0f, 0.0f, 1.0f, 1.0f);
 	Vector4f gray(0.5f, 0.5f, 0.5f, 1.0f);
 
-	Vector4f rand() { return { util::frand(),util::frand(),util::frand(), util::frand() }; }
+	Vector4f rand() { return { outl::frand(),outl::frand(),outl::frand(), outl::frand() }; }
 }
 
-vec4 vec4rand() { return { util::frand(), util::frand(), util::frand(), util::frand() }; }
+vec4 vec4rand() { return { outl::frand(), outl::frand(), outl::frand(), outl::frand() }; }

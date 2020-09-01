@@ -5,7 +5,7 @@
 
 #include <parrlib/Vector3f.h>
 #include <parrlib/stringutils.h>
-#include <parrlib/util.h>
+#include <parrlib/otherutil.h>
 
 Vector2f Vector2f::operator+ (const Vector2f &other) const {
 	return Vector2f(x + other.x, y + other.y);
@@ -298,7 +298,7 @@ Vector2f Vector2f::ox() const { return { 0.f, x }; }
 vec2 vec2x(float x) { return vec2(x, 0.f); }
 vec2 vec2y(float y) { return vec2(0.f, y); }
 
-vec2 vec2rand() { return { util::frand(), util::frand() }; }
+vec2 vec2rand() { return { outl::frand(), outl::frand() }; }
 
 namespace v2u {
 	vec2 x(float x) { return { x, 0.f }; }
