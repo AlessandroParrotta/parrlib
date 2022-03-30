@@ -8,7 +8,7 @@ currently, parrlib supports:
   * DX11
   * software renderer (incomplete)
 
-parrlib uses a structure of backends to communicate graphics APIs.
+parrlib uses a structure of backends to communicate with graphics APIs.
 backends are .dll files used to interface with the target graphics driver; a specific backend is loaded at startup dinamically based on user request.
 
 # External Requirements

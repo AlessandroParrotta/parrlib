@@ -28,9 +28,9 @@ namespace prb {
 		//void setVAO(std::string const& name, VAO const& vao);
 		//VAO& getVAO(std::string const& name);
 
-		bool findMesh(std::string const& name);
-		void setMesh(std::string const& name, Mesh3D const& m);
-		Mesh3D& getMesh(std::string const& name);
+		//bool findMesh(std::string const& name);
+		//void setMesh(std::string const& name, Mesh3D const& m);
+		//Mesh3D& getMesh(std::string const& name);
 	}
 
 #ifndef PARRLIB_NAMESPACE_SHORTEN

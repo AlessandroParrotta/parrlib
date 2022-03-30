@@ -2,7 +2,7 @@
 
 #include "sprite.h"
 
-#include "mesh3d.h"
+//#include "mesh3d.h"
 
 namespace prb {
 	namespace globals {
@@ -41,13 +41,13 @@ namespace prb {
 		//}
 
 
-		std::unordered_map<std::string, Mesh3D> meshes;
-		bool findMesh(std::string const& name) { return meshes.find(name) != meshes.end(); }
-		void setMesh(std::string const& name, Mesh3D const& m) { meshes[name] = m; }
-		Mesh3D& getMesh(std::string const& name) {
-			if (!findMesh(name)) meshes[name] = { name.c_str() };
-			return meshes[name];
-		}
+		//std::unordered_map<std::string, Mesh3D> meshes;
+		//bool findMesh(std::string const& name) { return meshes.find(name) != meshes.end(); }
+		//void setMesh(std::string const& name, Mesh3D const& m) { meshes[name] = m; }
+		//Mesh3D& getMesh(std::string const& name) {
+		//	if (!findMesh(name)) meshes[name] = { name.c_str() };
+		//	return meshes[name];
+		//}
 	}
 
 	namespace glb = globals;

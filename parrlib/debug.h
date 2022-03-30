@@ -86,7 +86,7 @@ namespace prb {
 		std::string tos(std::wstring wstr);
 
 		template<typename... Args> void pr(Args... args)	{ 
-			std::wstring wstr = stru::compose(args...);	ss << wstr;	
+			std::wstring wstr = stru::composew(args...);	ss << wstr;	
 
 			//int unpack[] = { ([](auto& arg) {
 			//	ss << arg;
@@ -96,22 +96,22 @@ namespace prb {
 			//auto values = { args... };
 			//std::for_each(values.begin(), values.end(), [](auto& val) { ss << val; });
 		}
-		template<typename... Args> void prt(Args... args)	{ std::wstring wstr = stru::compose(args...);	rtss << wstr;	}
+		template<typename... Args> void prt(Args... args)	{ std::wstring wstr = stru::composew(args...);	rtss << wstr;	}
 
 
 		void mbe(std::wstring const& errstr);
 		void mbe(std::string const& errstr);
-		template<typename... Args> void mbe(Args... args) { std::wstring wstr = stru::compose(args...);	mbe(wstr); }
+		template<typename... Args> void mbe(Args... args) { std::wstring wstr = stru::composew(args...);	mbe(wstr); }
 		void mbe();
 
 		void mbi(std::wstring const& errstr);
 		void mbi(std::string const& errstr);
-		template<typename... Args> void mbi(Args... args) { std::wstring wstr = stru::compose(args...);	mbi(wstr); }
+		template<typename... Args> void mbi(Args... args) { std::wstring wstr = stru::composew(args...);	mbi(wstr); }
 		void mbi();
 
 
 		void outStr(std::wstring const& str);
-		template<typename... Args> void outStr(Args... args) { std::wstring wstr = stru::compose(args...);	outStr(wstr); }
+		template<typename... Args> void outStr(Args... args) { std::wstring wstr = stru::composew(args...);	outStr(wstr); }
 		void outStr();
 
 	}

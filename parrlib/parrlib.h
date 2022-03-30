@@ -3,7 +3,7 @@
 #ifndef parrlib_h
 #define parrlib_h
 
-#include "mesh3d.h"
+//#include "mesh3d.h"
 
 #include "math/vector2f.h"
 #include "math/vector3f.h"

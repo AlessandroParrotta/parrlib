@@ -47,14 +47,14 @@ namespace prb {
                 if (f.good()) {
                     std::string line;
                     while (std::getline(f, line)) {
-                        deb::pr(line.c_str(), "\n");
+                        //deb::pr(line.c_str(), "\n");
 
                         std::stringstream ss; ss << line;
                         std::string key; ss >> key;
                         std::string value; int skipSpaces = ss.tellg(); while (line[skipSpaces] == ' ' && skipSpaces < line.length()) skipSpaces++; for (int i = skipSpaces; i < line.length(); i++) value += line[i];
 
                         fileSettings[key] = value;
-                        deb::pr(key.c_str(), " ", fileSettings[key].c_str(), "\n");
+                        //deb::pr(key.c_str(), " ", fileSettings[key].c_str(), "\n");
                     }
                 }
                 else deb::pr("error reading \"settings.cfg\"!\n");
@@ -313,7 +313,7 @@ namespace prb {
                 DEVICE_SCALE_FACTOR dsf;
                 GetScaleFactorForMonitor(mntr, &dsf);
 
-                deb::pr("dsf", outl::monitorScalingToPerc(dsf), "\n");
+                //deb::pr("dsf ", outl::monitorScalingToPerc(dsf), "\n");
                 cst::scalingFactor(outl::monitorScalingToPerc(dsf));
             }break;
             case WM_SIZE:
@@ -332,7 +332,7 @@ namespace prb {
 
                 resizing = true;
 
-                deb::pr(cst::res(), "\n");
+                //deb::pr(cst::res(), "\n");
 
                 funcs[FSTARTRESIZE]();
                 funcs[FRESIZE]();  

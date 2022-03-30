@@ -4,6 +4,8 @@
 #include "stringutils.h"
 #include "otherutil.h"
 
+#include "../debug.h"
+
 namespace prb {
 	Vector4f Vector4f::right() {
 		return Vector4f(1.0f, 0.0f, 0.0f, 0.0f);
@@ -313,6 +315,7 @@ namespace prb {
 
 	Vector4f::Vector4f(std::string hex) {
 		hex = hex.substr(1, hex.length() - 1);
+		if (hex.length() == 6) hex += "ff";
 		for (int i = hex.length(); i < 8; i++) hex += "0"; //adapt to standard size, 2*4 values
 
 		x = (float)((stru::getHexVal(hex[0]) * 16) + stru::getHexVal(hex[1])) / 255.f;

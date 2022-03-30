@@ -129,12 +129,6 @@
     <ClInclude Include="math\utils3d\camera3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\utils3d\geom3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mesh3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="impl\texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -193,9 +187,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\physics3d\projection3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\utils3d\utils3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -311,12 +302,6 @@
     <ClCompile Include="math\utils3d\camera3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\utils3d\geom3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mesh3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\stringutils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -360,9 +345,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\physics3d\projection3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="math\utils3d\utils3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

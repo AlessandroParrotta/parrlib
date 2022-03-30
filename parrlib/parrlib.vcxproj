@@ -44,7 +44,6 @@
     <ClInclude Include="math\physics3d\collision3d.h" />
     <ClInclude Include="math\physics3d\physutil3.h" />
     <ClInclude Include="math\physics3d\projection3d.h" />
-    <ClInclude Include="math\utils3d\utils3d.h" />
     <ClInclude Include="networking\tcpclientconnection.h" />
     <ClInclude Include="networking\tcpserver.h" />
     <ClInclude Include="networking\udpconnection.h" />
@@ -74,8 +73,6 @@
     <ClInclude Include="math\utils2d\utils2d.h" />
     <ClInclude Include="math\utils3d\axisalignedboundingbox3d.h" />
     <ClInclude Include="math\utils3d\camera3d.h" />
-    <ClInclude Include="math\utils3d\geom3d.h" />
-    <ClInclude Include="mesh3d.h" />
     <ClInclude Include="math\vector2f.h" />
     <ClInclude Include="math\vector3f.h" />
     <ClInclude Include="math\vector4f.h" />
@@ -102,7 +99,6 @@
     <ClCompile Include="math\physics3d\collision3d.cpp" />
     <ClCompile Include="math\physics3d\physutil3.cpp" />
     <ClCompile Include="math\physics3d\projection3d.cpp" />
-    <ClCompile Include="math\utils3d\utils3d.cpp" />
     <ClCompile Include="networking\tcpclientconnection.cpp" />
     <ClCompile Include="networking\tcpserver.cpp" />
     <ClCompile Include="networking\udpconnection.cpp" />
@@ -131,8 +127,6 @@
     <ClCompile Include="math\utils2d\utils2d.cpp" />
     <ClCompile Include="math\utils3d\axisalignedboundingbox3d.cpp" />
     <ClCompile Include="math\utils3d\camera3d.cpp" />
-    <ClCompile Include="math\utils3d\geom3d.cpp" />
-    <ClCompile Include="mesh3d.cpp" />
     <ClCompile Include="math\vector2f.cpp" />
     <ClCompile Include="math\vector3f.cpp" />
     <ClCompile Include="math\vector4f.cpp" />
