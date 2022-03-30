@@ -1,26 +1,23 @@
 # parrlib
-C++/OpenGL wrapper developed by a student as a hobby
+C++/Windows exclusive framework that facilitates creating and developing graphics applications.
 
-parrlib is a (kind-of) wrapper around most of the primary OpenGL functions, it is not complete by any means and probably somewhere (or everywhere) i'm doing things wrong;
-i've been developing this wrapper since about 2015 with semi-long breaks inbetween years, it kind of grew itself as i kept on learning new functions to include in it;
+parrlib builds a layer on top of existing graphics APIs and abstracts them into simpler and shorter functions that can be called in order to draw things on screen.
 
-whilst being set up as a CMake project, parrlib is still not compatible with OSes other than Windows
+currently, parrlib supports:
+	* OpenGL
+	* DX11
+	* software renderer (incomplete)
 
-parrlib focuses mainly on 2D apps, however there are already some 3D-oriented headers that could be helpful
+parrlib uses a structure of backends to communicate graphics APIs.
+backends are .dll files used to interface with the target graphics driver; a specific backend is loaded at startup dinamically based on user request.
 
-currently documentation is pretty much non-existent (i only wrote comments when i felt like it), i'll try to document more functions in the future
-
-if you want to compile a program using parrlib in its entirety, you'll need to compile (or find pre-compiled binaries of) the following external libraries:
-  * GLFW3
-  * SOIL                 --to load textures
-  * freetype2            --mandatory, for text rendering
-  * alut                 --if you use audio
-  * assimp               --if you want to load 3d models made with external programs
-  
-external include files have already been provided to guarantee the compilation of parrlib (in the thirdparty/ folder), i would provide library files myself (at least for Windows), but right now i don't know if i'm legally allowed to do so.
-
-# Pre-compiled binaries (Windows)
-[here](https://mega.nz/file/ci5wBKqK#bXbrTI7HTXe2q7svS_iU--OrqeNIix_NVN_DsfO-R4Q) are the pre-compiled binaries of parrlib for Windows (x86,x64, both release and debug), keep in mind it might not be updated to the latest commit
+# External Requirements
+in order to be fully built, parrlib requires:
+	* [DirectX Software Development Kit](https://www.microsoft.com/en-us/download/details.aspx?id=6812) 
+	* [freetype2](https://freetype.org/) (at least version 2.11.10)
+	* [SOIL](https://github.com/littlstar/soil)
+	
+[assimp](https://github.com/assimp/assimp) is used in the '3D' sets of folders inside 'parrlib/math' ('utils3d' and 'physics3d'), however, after a refactor of the whole codebase, the classes in this folder don't work anymore (eventually it'll be fixed), so try not to include any of the .h files in 'parrlib/math/utils3d' and 'parrlib/math/physics3d' for now.
 
 # Examples
-if you want to get started with parrlib, i suggest taking a look at my other repository [examples](https://github.com/AlessandroParrotta/parrlib-examples)
+if you want to get started with parrlib, you can visit the repository [examples](https://github.com/AlessandroParrotta/parrlib-examples) which contains some simple code samples.
