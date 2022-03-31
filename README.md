@@ -11,6 +11,9 @@ currently, parrlib supports:
 parrlib uses a structure of backends to communicate with graphics APIs.
 backends are .dll files used to interface with the target graphics driver; a specific backend is loaded at startup dinamically based on user request.
 
+# Build order
+before building any of the other backends, it is necessary to build 'parrlib' first, and generate an object file since every backend eventually links to 'parrlib.lib'.
+
 # External Requirements
 in order to be fully built, parrlib requires:
   * [DirectX Software Development Kit](https://www.microsoft.com/en-us/download/details.aspx?id=6812) 
