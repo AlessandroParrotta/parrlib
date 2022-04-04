@@ -7,6 +7,8 @@
 #include <math.h>
 #include <vector>
 #include <string>
+#include <functional>
+#include <filesystem>
 
 #include <locale>
 #include <codecvt>
@@ -27,6 +29,11 @@ namespace prb {
 	class Matrix2f;
 	class Matrix3f;
 	class Matrix4f;
+
+	namespace stringutils {
+		std::string tostr(std::wstring const& str);
+	}
+	namespace stru = stringutils;
 
 	namespace otherutil {
 
@@ -230,6 +237,138 @@ namespace prb {
 
 		template<typename T, typename B> constexpr B smallestCheck(T at, B ab, T bt, B bb, T ct, B cb) { return at < bt ? ct < at ? cb : ab : ct < bt ? cb : bb; }
 		template<typename T> constexpr T smallestCheck(T a, T b, T c) { return smallestCheck<T, T>(a, a, b, b, c, c); }
+
+		struct path {
+			std::vector<std::wstring> els;
+			bool isDirectory = false;
+
+			bool isSlash(wchar_t c) const { return c == '\\' || c == '/'; }
+
+			path(std::vector<std::wstring> els) { this->els = els; isDirectory = get(-1).find(L".") == std::wstring::npos; }
+			path(std::wstring inPath) {
+				if (inPath.length() <= 0) return;
+				if (inPath.length() >= 2 && inPath[0] == L'\"' && inPath[inPath.length() - 1] == L'\"') inPath = inPath.substr(1, inPath.length() - 2);
+
+				int i = isSlash(inPath[0]) ? 1 : 0;
+
+				while (i < inPath.length()) {
+					std::wstring el = L"";
+					while (i < inPath.length() && !isSlash(inPath[i])) {
+						el += inPath[i];
+						i++;
+					}
+					if (el.length() > 0) els.push_back(el);
+
+					i++;
+				}
+				isDirectory = get(-1).find(L".") == std::wstring::npos;
+
+				// for(int i=0; i<els.size(); i++) prw("el[",i,"]: ", els[i], "\n");
+				// prw("is directory: ", isDirectory, "\n");
+			}
+			path(const wchar_t* str) : path((std::wstring)str) {}
+
+			std::wstring get(int i) const { if (i < 0) i = els.size() + i; return els[i]; }
+			path subStart(std::wstring name) const {
+				std::vector<std::wstring> subpath;
+
+				int istart = 0;
+				for (int i = 0; i < els.size(); i++) if (els[i].compare(name) == 0) istart = i;
+				for (int i = istart; i < els.size(); i++) subpath.push_back(els[i]);
+
+				return path(subpath);
+			}
+			path subEnd(std::wstring name) const {
+				std::vector<std::wstring> subpath;
+
+				for (int i = 0; i < els.size(); i++) { subpath.push_back(els[i]); if (els[i].compare(name) == 0) break; }
+
+				return path(subpath);
+			}
+			path sub(int start, int end) const {
+				if (start < 0) start = els.size() + start;
+				if (end < 0) end = els.size() + end;
+				if (start > end) { int t = start; start = end; end = t; }
+				end = end < els.size() ? end : els.size();
+
+				std::vector<std::wstring> subpath;
+
+				for (int i = start; i < end; i++) { subpath.push_back(els[i]); }
+
+				return subpath;
+			}
+
+			int find(int el, std::wstring const& wstr) const { return get(el).find(wstr); }
+			int find(std::wstring const& wstr) const {
+				int found = -1;
+				for (int i = 0; i < els.size() && found == -1; i++) if (els[i].find(wstr) != std::wstring::npos) found = i;
+				return found;
+			}
+
+			std::wstring operator[] (int i) const { return get(i); }
+
+			path operator() (int start, int end) const {
+				return sub(start, end);
+			}
+
+			path operator[] (std::wstring const& start) const {
+				if (start.length() > 0) {
+					wchar_t sym = start[0];
+					if (sym == '<') return subEnd(start.substr(2, start.length() - 2));
+					else if (sym == '>') return subStart(start.substr(2, start.length() - 2));
+					else return subStart(start);
+				}
+				else return subStart(start);
+			}
+
+			std::wstring toStringw() const {
+				std::wstring str = L"";
+				for (int i = 0; i < els.size(); i++) str += els[i] + L"\\";
+				if (!isDirectory) str.erase(str.end() - 1);
+				return str;
+			}
+			std::string toString() const { return stru::tostr(toStringw()); }
+
+			operator std::wstring() const { return toStringw(); }
+			operator std::string() const { return toString(); }
+
+			std::wstring filename() const { return get(-1); }
+
+			path parent() { return (*this)(0, -1); }
+
+			void iterateFiles(std::function<int(path const&)> const& func) const {
+				if (!isDirectory) return;
+				for (auto const& dir_entry : std::filesystem::directory_iterator(toStringw())) {
+					int res = func(path(dir_entry.path().c_str()));
+					if (res != 0) break;
+				}
+
+				// iterateFolder(toStringw(), func); 
+			}
+
+			void iterateLines(std::function<int(std::wstring const&)> const& func) {
+				if (isDirectory) return;
+
+				std::wifstream f(toStringw().c_str());
+				if (!f) { f.close(); return; }
+
+				std::wstring line;
+				while (f.good() && !f.eof()) {
+					std::getline(f, line);
+					int res = func(line);
+					if (res != 0) break;
+				}
+
+				f.close();
+			}
+
+		};
+		inline std::ostream& operator<<(std::ostream& os, const path& p) { os << p.toString(); return os; }
+		inline std::wostream& operator<<(std::wostream& os, const path& p) { os << p.toStringw(); return os; }
+
+		inline void iterateFolder(path const& path, std::function<int(prb::otherutil::path const&)> const& func) {
+			path.iterateFiles(func);
+		}
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 		HWND findMainWindow(unsigned long process_id);
