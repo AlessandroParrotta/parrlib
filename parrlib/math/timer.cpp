@@ -58,19 +58,19 @@ namespace prb {
 		}
 	}
 
-	int64_t Timer::getNano() { return		   duration.count(); }
-	double Timer::getMicro() { return (double)duration.count() / (double)1e03; }
-	double Timer::getMilli() { return (double)duration.count() / (double)1e06; }
-	double Timer::getSec() { return (double)duration.count() / (double)1e09; }
+	int64_t Timer::nano() { return		   duration.count(); }
+	double Timer::micro() { return (double)duration.count() / (double)1e03; }
+	double Timer::milli() { return (double)duration.count() / (double)1e06; }
+	double Timer::sec() { return (double)duration.count() / (double)1e09; }
 
-	std::string Timer::getTime(int decimals) { return stringutils::getTimeFormatted(duration.count(), decimals, stringutils::TimeScale::NANO); }
-	std::string Timer::getTime() { return getTime(2); }
+	std::string Timer::time(int decimals) { return stringutils::ts::fromTime(duration.count(), decimals, stringutils::ts::timeScale::NANO); }
+	std::string Timer::time() { return time(2); }
 
-	int64_t Timer::getAvgNano() { return		 avg; }
-	double Timer::getAvgMicro() { return (double)avg / (double)1e03; }
-	double Timer::getAvgMilli() { return (double)avg / (double)1e06; }
-	double Timer::getAvgSec() { return (double)avg / (double)1e09; }
+	int64_t Timer::avgNano() { return		 avg; }
+	double Timer::avgMicro() { return (double)avg / (double)1e03; }
+	double Timer::avgMilli() { return (double)avg / (double)1e06; }
+	double Timer::avgSec() { return (double)avg / (double)1e09; }
 
-	std::string Timer::getAvgTime(int decimals) { return stringutils::getTimeFormatted(avg, decimals, stringutils::TimeScale::NANO); }
-	std::string Timer::getAvgTime() { return getAvgTime(2); }
+	std::string Timer::avgTime(int decimals) { return stringutils::ts::fromTime(avg, decimals, stringutils::ts::timeScale::NANO); }
+	std::string Timer::avgTime() { return avgTime(2); }
 }

@@ -54,6 +54,7 @@ namespace prb {
 		std::string toString() const;
 		std::wstring toWString() const;
 
+		void clamp(Vector3f vmin, Vector3f vmax);
 		Vector3f clamped(Vector3f vmin, Vector3f vmax);
 		Vector3f floored();
 		Vector3f ceiled();

@@ -227,7 +227,7 @@ namespace prb {
 			Timer timer;
 			sleepUS(passiveWaitTime);
 			timer.set();
-			double timeSlept = timer.getMicro();
+			double timeSlept = timer.micro();
 
 			//Timer timer;
 			//while (timer.getMicro() < passiveWaitTime) {
@@ -243,7 +243,7 @@ namespace prb {
 			//timer.reset();
 			while (timeSlept < microseconds) {
 				timer.set();
-				timeSlept = timer.getMicro();
+				timeSlept = timer.micro();
 			}
 		}
 

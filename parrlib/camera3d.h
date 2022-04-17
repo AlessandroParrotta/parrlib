@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../input.h"
-#include "../../math/vector3f.h"
-#include "../../math/quaternion.h"
-#include "../../math/matrix4f.h"
+#include "input.h"
+#include "math/vector3f.h"
+#include "math/quaternion.h"
+#include "math/matrix4f.h"
 
 namespace prb {
 	class Camera3D {

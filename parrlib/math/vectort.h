@@ -134,7 +134,7 @@ namespace prb {
 	constexpr std::ostream& operator<<(std::ostream& os, VectorT<T, L> v) {
 		os << "(";
 		for (int i = 0; i < L; i++) {
-			os << v[i] << (i == L - 1 ? "" : " ");
+			os << v[i] << (i == L - 1 ? "" : ", ");
 		}
 		os << ")";
 		return os;
@@ -144,7 +144,7 @@ namespace prb {
 	constexpr std::wostream& operator<<(std::wostream& os, VectorT<T, L> v) {
 		os << L"(";
 		for (int i = 0; i < L; i++) {
-			os << v[i] << (i == L - 1 ? L"" : L" ");
+			os << v[i] << (i == L - 1 ? L"" : L", ");
 		}
 		os << L")";
 		return os;
@@ -161,6 +161,16 @@ namespace prb {
 
 	typedef VectorT<int, 4> Vector4i;
 	typedef Vector4i vec4i;
+
+
+	//typedef VectorT<float, 2> Vector2f;
+	//typedef Vector2f vec2f;
+
+	//typedef VectorT<float, 3> Vector3f;
+	//typedef Vector3f vec3f;
+
+	//typedef VectorT<float, 4> Vector4f;
+	//typedef Vector4f vec4f;
 
 
 	typedef VectorT<double, 2> Vector2d;

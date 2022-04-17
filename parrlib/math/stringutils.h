@@ -42,21 +42,23 @@ namespace prb {
 
 		std::string cutDecimals(std::string number, int decimals);
 
-		std::string getByteSizeFormatted(long long numBytes, int decimals);
+		std::string byteStr(long long bytes, int decimals);
 
-		enum TimeScale {
-			NANO,
-			MICRO,
-			MILLI,
-			SEC
-		};
-		std::string getTimeFormatted(double inputTime, int decimals, TimeScale inputTimeScale);
-		std::string getTimeFormattedNano(double inputTime, int decimals);
-		std::string getTimeFormattedMicro(double inputTime, int decimals);
-		std::string getTimeFormattedMilli(double inputTime, int decimals);
-		std::string getTimeFormattedSec(double inputTime, int decimals);
+        namespace ts {
+            enum timeScale {
+                NANO,
+                MICRO,
+                MILLI,
+                SEC
+            };
+            std::string fromTime(double inputTime, int decimals, timeScale inputTimeScale);
+            std::string fromNano(double inputTime, int decimals);
+            std::string fromMicro(double inputTime, int decimals);
+            std::string fromMilli(double inputTime, int decimals);
+            std::string fromSec(double inputTime, int decimals);
 
-		std::string toTimestampFormat(int sec);
+            std::string toTs(unsigned long long sec);
+        }
 
 		int getHexVal(char c);
 
@@ -106,9 +108,15 @@ namespace prb {
 
 
         inline std::wstringstream& composeWss() { static std::wstringstream composeWsst; return composeWsst; };
+        
+        // i had to define some overloads to execute if-statements at compile time
+        inline void composeSingle(std::string str) { composeWss() << str.c_str(); }
+        inline void composeSingle(std::wstring str) { composeWss() << str.c_str(); }
+        template<typename T> inline void composeSingle(T el) { composeWss() << el; }
+
         template<typename... Args> inline std::wstring composew(Args... args) {
             int unpack[] = { ([](auto& arg) {
-                composeWss() << arg;
+                composeSingle(arg);
             }(args), 0)..., 0 };
             static_cast<void>(unpack);
 
@@ -156,6 +164,20 @@ namespace prb {
 			return t;
 		}
 
+        template<typename T>
+        std::vector<std::string> tostr(std::vector<T> const& vec) {
+            std::vector<std::string> res; 
+            res.reserve(vec.size()); 
+            for (int i = 0; i < vec.size(); i++) res.push_back(tostr(vec[i])); 
+            return res;
+        }
+        template<typename T>
+        std::vector<T> tot(std::vector<std::string> const& vec) {
+            std::vector<std::string> res;
+            res.reserve(vec.size());
+            for (int i = 0; i < vec.size(); i++) res.push_back(tot<T>(vec[i]));
+            return res;
+        }
 
 		std::vector<std::wstring> toLines(std::wstring const& str);
 		std::vector<std::string> toLines(std::string const& str);
@@ -267,14 +289,16 @@ namespace prb {
             return res;
         }
 
-        inline std::wstring replace(std::wstring subject, std::wstring const& search,
-            std::wstring const& replace) {
+        inline std::wstring replace(std::wstring subject, std::wstring const& search, std::wstring const& replace) {
             size_t pos = 0;
             while ((pos = subject.find(search, pos)) != std::wstring::npos) {
                 subject.replace(pos, search.length(), replace);
                 pos += replace.length();
             }
             return subject;
+        }        
+        inline std::string replace(std::string subject, std::string const& search, std::wstring const& replacev) {
+            return tostr(replace(towstr(subject), towstr(search), towstr(replacev)));
         }
 
         struct path {
@@ -377,6 +401,8 @@ namespace prb {
 
             return strs;
         }
+
+        inline std::vector<std::string> split(std::string const& str, std::string const& pattern) { return tostr(split(towstr(str), towstr(pattern))); }
 	}
 
 #ifndef PARRLIB_NAMESPACE_SHORTEN
@@ -384,3 +410,20 @@ namespace prb {
 #endif
 
 }
+
+
+//if (typeid(arg) == typeid(std::string)) {
+//    std::string str = (std::string)arg;
+//    composeWss() << str.c_str();
+//}
+//else if (typeid(arg) == typeid(std::wstring)) {
+//    std::wstring str = (std::wstring)arg;
+//    composeWss() << str.c_str();
+//}
+//else composeWss() << arg; 
+//
+//composeWss() << arg;
+
+//for (auto&& arg : { args... }) {
+//    composeWss() << arg;
+//}

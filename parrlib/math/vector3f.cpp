@@ -207,13 +207,8 @@ namespace prb {
 		return ss.str();
 	}
 
-	Vector3f Vector3f::clamped(Vector3f vmin, Vector3f vmax) {
-		return {
-			std::fmin(std::fmax(x, vmin.x), vmax.x),
-			std::fmin(std::fmax(y, vmin.y), vmax.y),
-			std::fmin(std::fmax(z, vmin.z), vmax.z),
-		};
-	}
+	void Vector3f::clamp(Vector3f vmin, Vector3f vmax) { x = outl::clamp(x, vmin.x, vmax.x); y = outl::clamp(y, vmin.y, vmax.y); z = outl::clamp(z, vmin.z, vmax.z); }
+	Vector3f Vector3f::clamped(Vector3f vmin, Vector3f vmax) { Vector3f res = *this; res.clamp(vmin, vmax); return res; }
 
 	Vector3f Vector3f::floored() { return { std::floorf(x),std::floorf(y),std::floorf(z), }; }
 	Vector3f Vector3f::ceiled() { return { std::ceilf(x),std::ceilf(y),std::ceilf(z), }; }

@@ -40,6 +40,9 @@ namespace prb {
 
 		constexpr unsigned int length() const { return 4; }
 
+		void clamp(Vector4f vmin, Vector4f vmax);
+		Vector4f clamped(Vector4f vmin, Vector4f vmax);
+
 		float magnitude() const;
 		float dot(Vector4f other) const;
 		Vector4f normalized() const;

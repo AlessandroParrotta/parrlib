@@ -628,11 +628,11 @@ namespace prb {
 
                             //Timer busyT;
 
-                            double sleepTime = waitT.getMicro();
+                            double sleepTime = waitT.micro();
                             if (sleepTime < timeToSleep) {
                                 while (sleepTime < timeToSleep) {
                                     waitT.set();
-                                    sleepTime = waitT.getMicro();
+                                    sleepTime = waitT.micro();
                                 }
                             }
 

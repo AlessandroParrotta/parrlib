@@ -22,6 +22,7 @@
     <ClInclude Include="audio\audio.h" />
     <ClInclude Include="audio\audioclip.h" />
     <ClInclude Include="audio\audiosource.h" />
+    <ClInclude Include="camera3d.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="context.h" />
     <ClInclude Include="debug.h" />
@@ -44,6 +45,8 @@
     <ClInclude Include="math\physics3d\collision3d.h" />
     <ClInclude Include="math\physics3d\physutil3.h" />
     <ClInclude Include="math\physics3d\projection3d.h" />
+    <ClInclude Include="math\utils3d\geom3d.h" />
+    <ClInclude Include="math\utils3d\utils3d.h" />
     <ClInclude Include="networking\tcpclientconnection.h" />
     <ClInclude Include="networking\tcpserver.h" />
     <ClInclude Include="networking\udpconnection.h" />
@@ -72,7 +75,6 @@
     <ClInclude Include="math\utils2d\poly.h" />
     <ClInclude Include="math\utils2d\utils2d.h" />
     <ClInclude Include="math\utils3d\axisalignedboundingbox3d.h" />
-    <ClInclude Include="math\utils3d\camera3d.h" />
     <ClInclude Include="math\vector2f.h" />
     <ClInclude Include="math\vector3f.h" />
     <ClInclude Include="math\vector4f.h" />
@@ -82,6 +84,7 @@
     <ClCompile Include="audio\audio.cpp" />
     <ClCompile Include="audio\audioclip.cpp" />
     <ClCompile Include="audio\audiosource.cpp" />
+    <ClCompile Include="camera3d.cpp" />
     <ClCompile Include="constants.cpp" />
     <ClCompile Include="context.cpp" />
     <ClCompile Include="debug.cpp" />
@@ -99,6 +102,8 @@
     <ClCompile Include="math\physics3d\collision3d.cpp" />
     <ClCompile Include="math\physics3d\physutil3.cpp" />
     <ClCompile Include="math\physics3d\projection3d.cpp" />
+    <ClCompile Include="math\utils3d\geom3d.cpp" />
+    <ClCompile Include="math\utils3d\utils3d.cpp" />
     <ClCompile Include="networking\tcpclientconnection.cpp" />
     <ClCompile Include="networking\tcpserver.cpp" />
     <ClCompile Include="networking\udpconnection.cpp" />
@@ -126,7 +131,6 @@
     <ClCompile Include="math\utils2d\poly.cpp" />
     <ClCompile Include="math\utils2d\utils2d.cpp" />
     <ClCompile Include="math\utils3d\axisalignedboundingbox3d.cpp" />
-    <ClCompile Include="math\utils3d\camera3d.cpp" />
     <ClCompile Include="math\vector2f.cpp" />
     <ClCompile Include="math\vector3f.cpp" />
     <ClCompile Include="math\vector4f.cpp" />

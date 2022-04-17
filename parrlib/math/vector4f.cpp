@@ -144,6 +144,10 @@ namespace prb {
 		return x * other.x + y * other.y + z * other.z + w * other.w;
 	}
 
+
+	void Vector4f::clamp(Vector4f vmin, Vector4f vmax) { x = outl::clamp(x, vmin.x, vmax.x); y = outl::clamp(y, vmin.y, vmax.y); z = outl::clamp(z, vmin.z, vmax.z); w = outl::clamp(w, vmin.w, vmax.w); }
+	Vector4f Vector4f::clamped(Vector4f vmin, Vector4f vmax) { vec4 res = *this; res.clamp(vmin, vmax); return res; }
+
 	float Vector4f::magnitude() const {
 		return sqrt((x * x) + (y * y) + (z * z) + (w * w));
 	}

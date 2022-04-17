@@ -29,18 +29,18 @@ namespace prb {
 		void reset();
 		void set();
 
-		int64_t getNano();
-		double getMicro();
-		double getMilli();
-		double getSec();
-		std::string getTime(int decimals);
-		std::string getTime();
+		int64_t nano();
+		double micro();
+		double milli();
+		double sec();
+		std::string time(int decimals);
+		std::string time();
 
-		int64_t getAvgNano();
-		double getAvgMicro();
-		double getAvgMilli();
-		double getAvgSec();
-		std::string getAvgTime(int decimals);
-		std::string getAvgTime();
+		int64_t avgNano();
+		double avgMicro();
+		double avgMilli();
+		double avgSec();
+		std::string avgTime(int decimals);
+		std::string avgTime();
 	};
 }

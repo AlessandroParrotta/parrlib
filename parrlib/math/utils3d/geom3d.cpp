@@ -4,7 +4,7 @@
 #include "../stringutils.h"
 #include "../otherutil.h"
 
-#include "../../debug.h"
+//#include "../../debug.h"
 
 namespace prb {
 	namespace geom3D {
@@ -217,8 +217,8 @@ namespace prb {
 				res.idx.push_back(secondStartIdx + i);
 				res.idx.push_back(secondStartIdx + i +1);
 
-				deb::ss << (firstStartIdx + i) << " " << (secondStartIdx + i + 1) << " " << (firstStartIdx + i + 1) << "\n";
-				deb::ss << (firstStartIdx + i) << " " << (secondStartIdx + i) << " " << (secondStartIdx + i + 1) << "\n";
+				//deb::ss << (firstStartIdx + i) << " " << (secondStartIdx + i + 1) << " " << (firstStartIdx + i + 1) << "\n";
+				//deb::ss << (firstStartIdx + i) << " " << (secondStartIdx + i) << " " << (secondStartIdx + i + 1) << "\n";
 			}
 
 			return res;
@@ -283,7 +283,7 @@ namespace prb {
 		geommesh3 fromFileSingle(const char* fileName) {
 			geommesh3 rm;
 
-			Timer t;
+			//Timer t;
 
 			Assimp::Importer imp;
 			const aiScene* sc = imp.ReadFile(stru::fallbackPath(outl::getExeFolder(), fileName), aiProcess_Triangulate);
@@ -292,7 +292,7 @@ namespace prb {
 				addNodeMeshes(fileName, sc->mMaterials, sc->mMeshes, sc->mRootNode, rm);
 			}
 
-			t.set(); deb::tss << "assimp geom3 time " << t.getTime().c_str() << "\n"; deb::outStr();
+			//t.set(); deb::tss << "assimp geom3 time " << t.getTime().c_str() << "\n"; deb::outStr();
 
 			return rm;
 		}

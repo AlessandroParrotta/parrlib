@@ -163,7 +163,7 @@ namespace prb {
 			return number;
 		}
 
-		std::string getByteSizeFormatted(long long numBytes, int decimals) {
+		std::string byteStr(long long numBytes, int decimals) {
 			int type = 0;
 			double bytesCalc = (double)numBytes;
 			double finalBytes = bytesCalc;
@@ -193,90 +193,92 @@ namespace prb {
 			return finalString;
 		}
 
-		std::string getTimeFormatted(double inputTime, int decimals, TimeScale inputTimeScale) {
-			bool smallerThanOne = inputTime < 1.f;
-			int normalizedScale = inputTimeScale;
-			//std::cout << inputTime << " " << normalizedScale << "\n";
-
-			double prevInputTime = inputTime;
-			while (smallerThanOne && normalizedScale > 0 && inputTime < 1.) {
-				prevInputTime = inputTime;
-				inputTime *= 1e03;
-				normalizedScale--;
+		namespace ts {
+			std::string fromTime(double inputTime, int decimals, timeScale inputTimeScale) {
+				bool smallerThanOne = inputTime < 1.f;
+				int normalizedScale = inputTimeScale;
 				//std::cout << inputTime << " " << normalizedScale << "\n";
-			}
-			/*if (smallerThanOne) {
-				normalizedScale++;
-			}*/
 
-			while (!smallerThanOne && normalizedScale <= 3 && inputTime > 1.) {
-				prevInputTime = inputTime;
-				inputTime /= 1e03;
-				normalizedScale++;
-				//std::cout << inputTime << " " << normalizedScale << "\n";
-			}
-			if (!smallerThanOne) {
-				inputTime = prevInputTime;
-				normalizedScale--;
-			}
-
-			std::string finalString = cutDecimals(std::to_string(inputTime), decimals);
-
-			switch (normalizedScale) {
-			case 0: finalString += "ns"; break;
-			case 1: finalString += "us"; break;
-			case 2: finalString += "ms"; break;
-			case 3: finalString += "s"; break;
-			}
-
-			return finalString;
-		}
-
-		std::string getTimeFormattedNano(double inputTime, int decimals) {
-			return getTimeFormatted(inputTime, decimals, TimeScale::NANO);
-		}
-
-		std::string getTimeFormattedMicro(double inputTime, int decimals) {
-			return getTimeFormatted(inputTime, decimals, TimeScale::MICRO);
-		}
-
-		std::string getTimeFormattedMilli(double inputTime, int decimals) {
-			return getTimeFormatted(inputTime, decimals, TimeScale::MILLI);
-		}
-
-		std::string getTimeFormattedSec(double inputTime, int decimals) {
-			return getTimeFormatted(inputTime, decimals, TimeScale::SEC);
-		}
-
-		std::string to_time_digit(int t) {
-			if (t < 10)  return "0" + std::to_string(t);
-			else        return std::to_string(t);
-		}
-
-		std::string toTimestampFormat(int sec) {
-			if (sec == 0) return "0:00";
-
-			int tsec = sec % 60;
-			int tmins = (sec / 60) % 60;
-			int thours = (sec / 60 / 60) % 24;
-			int tdays = (sec / 60 / 60 / 24) % 365;
-			int tyears = sec / 60 / 60 / 24 / 365;
-
-			std::vector<int> iar = { tsec, tmins, thours, tdays, tyears };
-
-			std::stringstream ss;
-			bool started = false;
-			for (int i = iar.size() - 1; i >= 0; i--) {
-				if (!started) {
-					if (iar[i] > 0) {
-						ss << (i == 0 ? ((iar[i] < 10 ? "0:0" : "0:")) : "")
-							<< iar[i] << (i == 0 ? "" : ":");
-						started = true;
-					}
+				double prevInputTime = inputTime;
+				while (smallerThanOne && normalizedScale > 0 && inputTime < 1.) {
+					prevInputTime = inputTime;
+					inputTime *= 1e03;
+					normalizedScale--;
+					//std::cout << inputTime << " " << normalizedScale << "\n";
 				}
-				else ss << to_time_digit(iar[i]) << (i == 0 ? "" : ":");
+				/*if (smallerThanOne) {
+					normalizedScale++;
+				}*/
+
+				while (!smallerThanOne && normalizedScale <= 3 && inputTime > 1.) {
+					prevInputTime = inputTime;
+					inputTime /= 1e03;
+					normalizedScale++;
+					//std::cout << inputTime << " " << normalizedScale << "\n";
+				}
+				if (!smallerThanOne) {
+					inputTime = prevInputTime;
+					normalizedScale--;
+				}
+
+				std::string finalString = cutDecimals(std::to_string(inputTime), decimals);
+
+				switch (normalizedScale) {
+				case 0: finalString += "ns"; break;
+				case 1: finalString += "us"; break;
+				case 2: finalString += "ms"; break;
+				case 3: finalString += "s"; break;
+				}
+
+				return finalString;
 			}
-			return ss.str();
+
+			std::string fromNano(double inputTime, int decimals) {
+				return fromTime(inputTime, decimals, timeScale::NANO);
+			}
+
+			std::string fromMicro(double inputTime, int decimals) {
+				return fromTime(inputTime, decimals, timeScale::MICRO);
+			}
+
+			std::string fromMilli(double inputTime, int decimals) {
+				return fromTime(inputTime, decimals, timeScale::MILLI);
+			}
+
+			std::string fromSec(double inputTime, int decimals) {
+				return fromTime(inputTime, decimals, timeScale::SEC);
+			}
+
+			std::string to_time_digit(int t) {
+				if (t < 10)  return "0" + std::to_string(t);
+				else        return std::to_string(t);
+			}
+
+			std::string toTs(unsigned long long sec) {
+				if (sec == 0) return "0:00";
+
+				unsigned long long tsec = sec % 60;
+				unsigned long long tmins = (sec / 60) % 60;
+				unsigned long long thours = (sec / 60 / 60) % 24;
+				unsigned long long tdays = (sec / 60 / 60 / 24) % 365;
+				unsigned long long tyears = sec / 60 / 60 / 24 / 365;
+
+				std::vector<unsigned long long> iar = { tsec, tmins, thours, tdays, tyears };
+
+				std::stringstream ss;
+				bool started = false;
+				for (int i = iar.size() - 1; i >= 0; i--) {
+					if (!started) {
+						if (iar[i] > 0) {
+							ss << (i == 0 ? ((iar[i] < 10ULL ? "0:0" : "0:")) : "")
+								<< iar[i] << (i == 0 ? "" : ":");
+							started = true;
+						}
+					}
+					else ss << to_time_digit(iar[i]) << (i == 0 ? "" : ":");
+				}
+				return ss.str();
+			}
 		}
 
 		int getHexVal(char c) {
@@ -439,6 +441,12 @@ namespace prb {
 				if (str[i] == L'\n') { res.push_back(str.substr(lastLine, i - lastLine)); lastLine = i + 1; }
 			}
 			res.push_back(str.substr(lastLine, str.length() - lastLine));
+
+			//str = stru::replace(str, L"\t", L"    ");
+
+			//std::vector<std::wstring> lines = stru::split(str, L"\n");
+			//if (strs.size() <= 0) strs.push_back(L""); if (lines.size() > 0) strs.back() += lines[0];
+			//for (int i = 1; i < lines.size(); i++) strs.push_back(lines[i]);
 
 			return res;
 		}

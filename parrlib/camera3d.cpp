@@ -1,7 +1,7 @@
 #include "camera3d.h"
 
-#include "../../debug.h"
-#include "../../time.h"
+#include "debug.h"
+#include "time.h"
 
 namespace prb {
 	void Camera3D::input() {
