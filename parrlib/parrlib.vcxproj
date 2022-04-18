@@ -23,7 +23,6 @@
     <ClInclude Include="audio\audioclip.h" />
     <ClInclude Include="audio\audiosource.h" />
     <ClInclude Include="camera3d.h" />
-    <ClInclude Include="constants.h" />
     <ClInclude Include="context.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="debugmenu\debugmenu.h" />
@@ -38,46 +37,16 @@
     <ClInclude Include="impl\vertexbuffer.h" />
     <ClInclude Include="indexbuffer.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="math\matrix2f.h" />
-    <ClInclude Include="math\matrix3f.h" />
-    <ClInclude Include="math\matrix4f.h" />
-    <ClInclude Include="math\physics3d\collider3d.h" />
-    <ClInclude Include="math\physics3d\collision3d.h" />
-    <ClInclude Include="math\physics3d\physutil3.h" />
-    <ClInclude Include="math\physics3d\projection3d.h" />
-    <ClInclude Include="math\utils3d\geom3d.h" />
-    <ClInclude Include="math\utils3d\utils3d.h" />
-    <ClInclude Include="networking\tcpclientconnection.h" />
-    <ClInclude Include="networking\tcpserver.h" />
-    <ClInclude Include="networking\udpconnection.h" />
-    <ClInclude Include="networking\winsockutil.h" />
-    <ClInclude Include="math\orthocoord.h" />
-    <ClInclude Include="math\otherutil.h" />
+    <ClInclude Include="mesh3d.h" />
     <ClInclude Include="parrlib.h" />
-    <ClInclude Include="math\physics2d\collider2d.h" />
-    <ClInclude Include="math\physics2d\collision2d.h" />
-    <ClInclude Include="math\physics2d\physutil2.h" />
-    <ClInclude Include="math\physics2d\projection2d.h" />
-    <ClInclude Include="math\quaternion.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="spritebatch.h" />
-    <ClInclude Include="math\stringutils.h" />
     <ClInclude Include="textrenderer.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="time.h" />
-    <ClInclude Include="math\timer.h" />
     <ClInclude Include="ui\imui.h" />
     <ClInclude Include="util.h" />
-    <ClInclude Include="math\utils2d\axisalignedboundingbox2d.h" />
-    <ClInclude Include="math\utils2d\consts.h" />
-    <ClInclude Include="math\utils2d\gameobject.h" />
-    <ClInclude Include="math\utils2d\poly.h" />
-    <ClInclude Include="math\utils2d\utils2d.h" />
-    <ClInclude Include="math\utils3d\axisalignedboundingbox3d.h" />
-    <ClInclude Include="math\vector2f.h" />
-    <ClInclude Include="math\vector3f.h" />
-    <ClInclude Include="math\vector4f.h" />
+    <ClInclude Include="utils2d\gameobject.h" />
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -85,7 +54,6 @@
     <ClCompile Include="audio\audioclip.cpp" />
     <ClCompile Include="audio\audiosource.cpp" />
     <ClCompile Include="camera3d.cpp" />
-    <ClCompile Include="constants.cpp" />
     <ClCompile Include="context.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="debugmenu\debugmenu.cpp" />
@@ -95,45 +63,15 @@
     <ClCompile Include="impl\impl.cpp" />
     <ClCompile Include="indexbuffer.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="math\matrix2f.cpp" />
-    <ClCompile Include="math\matrix3f.cpp" />
-    <ClCompile Include="math\matrix4f.cpp" />
-    <ClCompile Include="math\physics3d\collider3d.cpp" />
-    <ClCompile Include="math\physics3d\collision3d.cpp" />
-    <ClCompile Include="math\physics3d\physutil3.cpp" />
-    <ClCompile Include="math\physics3d\projection3d.cpp" />
-    <ClCompile Include="math\utils3d\geom3d.cpp" />
-    <ClCompile Include="math\utils3d\utils3d.cpp" />
-    <ClCompile Include="networking\tcpclientconnection.cpp" />
-    <ClCompile Include="networking\tcpserver.cpp" />
-    <ClCompile Include="networking\udpconnection.cpp" />
-    <ClCompile Include="networking\winsockutil.cpp" />
-    <ClCompile Include="math\orthocoord.cpp" />
-    <ClCompile Include="math\otherutil.cpp" />
-    <ClCompile Include="math\physics2d\collider2d.cpp" />
-    <ClCompile Include="math\physics2d\collision2d.cpp" />
-    <ClCompile Include="math\physics2d\physutil2.cpp" />
-    <ClCompile Include="math\physics2d\projection2d.cpp" />
-    <ClCompile Include="math\quaternion.cpp" />
+    <ClCompile Include="mesh3d.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="spritebatch.cpp" />
-    <ClCompile Include="math\stringutils.cpp" />
     <ClCompile Include="textrenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="time.cpp" />
-    <ClCompile Include="math\timer.cpp" />
     <ClCompile Include="ui\imui.cpp" />
     <ClCompile Include="util.cpp" />
-    <ClCompile Include="math\utils2d\axisalignedboundingbox2d.cpp" />
-    <ClCompile Include="math\utils2d\consts.cpp" />
-    <ClCompile Include="math\utils2d\gameobject.cpp" />
-    <ClCompile Include="math\utils2d\poly.cpp" />
-    <ClCompile Include="math\utils2d\utils2d.cpp" />
-    <ClCompile Include="math\utils3d\axisalignedboundingbox3d.cpp" />
-    <ClCompile Include="math\vector2f.cpp" />
-    <ClCompile Include="math\vector3f.cpp" />
-    <ClCompile Include="math\vector4f.cpp" />
+    <ClCompile Include="utils2d\gameobject.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,8 +142,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ParrotIncludeDir);C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(ParrotLibDir)$(Platform)\$(Configuration);C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ParrlibCoreIncludeDir);$(ParrotIncludeDir);C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(ParrlibCoreLibDir);$(ParrotLibDir)$(Platform)\$(Configuration);C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <IntDir>$(ParrotIntDir)$(SolutionName)\$(ProjectName)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

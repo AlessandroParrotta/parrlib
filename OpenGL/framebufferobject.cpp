@@ -1,8 +1,9 @@
 #include <glad/glad.h>
 //#include <GLFW/glfw3.h>
 
+#include <parrlibcore/timer.h>
+
 #include "framebufferobject.h"
-#include "../parrlib/math/timer.h"
 #include "../parrlib/debug.h"
 
 #include "context.h"

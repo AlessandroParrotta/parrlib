@@ -464,7 +464,7 @@ namespace prb{
 				//click timer management
 				if (tf.enableClickTimer && input::getMouseDelta() != 0.f) tf.enableClickTimer = false;
 				if (tf.enableClickTimer) {
-					tf.clickTimer += gtime::deltaTime;
+					tf.clickTimer += tick::deltaTime;
 
 					if (input::clickDown()) {
 						tf.clickTimes++;
@@ -603,7 +603,7 @@ namespace prb{
 					input::getKey(VK_RIGHT) ||
 					(input::getKey(VK_LCONTROL) && input::getKey('V')) ||
 					input::getKey(VK_DELETE)
-					) tf.txtimer += gtime::deltaTime;
+					) tf.txtimer += tick::deltaTime;
 				else { tf.txtimer = 0.f; tf.txfirst = false; }
 
 				if (tf.txtimer > speed) { tf.txtimer = 0.f; tf.txfirst = true; }

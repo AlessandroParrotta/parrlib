@@ -6,17 +6,17 @@
 #include <glad/glad.h>
 //#include <GLFW/glfw3.h>
 
+#include <parrlibcore/matrix4f.h>
+#include <parrlibcore/matrix3f.h>
+#include <parrlibcore/matrix2f.h>
+
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector3f.h>
+#include <parrlibcore/otherutil.h>
+#include <parrlibcore/constants.h>
+#include <parrlibcore/tick.h>
+
 #include "../parrlib/Input.h"
-#include "../parrlib/constants.h"
-#include "../parrlib/Time.h"
-#include "../parrlib/math/matrix4f.h"
-#include "../parrlib/math/matrix3f.h"
-#include "../parrlib/math/matrix2f.h"
-
-#include "../parrlib/math/vector2f.h"
-#include "../parrlib/math/vector3f.h"
-
-#include "../parrlib/math/otherutil.h"
 
 #include "../parrlib/impl/shader.h"
 

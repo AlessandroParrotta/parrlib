@@ -1,9 +1,10 @@
 #include "Texture.h"
 
+#include <parrlibcore/stringutils.h>
+
 #include "../parrlib/util.h"
 #include "../parrlib/debug.h"
 #include "common.h"
-#include "../parrlib/math/stringutils.h"
 
 #include "vertexarrayobject.h"
 

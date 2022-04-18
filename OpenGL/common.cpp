@@ -1,6 +1,6 @@
 #include "common.h"
 
-#include "../parrlib/math/stringutils.h"
+#include <parrlibcore/stringutils.h>
 
 namespace gl {
 	namespace com {

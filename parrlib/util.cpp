@@ -1,7 +1,8 @@
 #include "util.h"
 
-#include "constants.h"
-#include "math/utils2d/utils2d.h"
+#include <parrlibcore/utils2d/utils2d.h>
+
+#include <parrlibcore/constants.h>
 
 #include "debug.h"
 #include "vertexbuffer.h"

@@ -2,10 +2,10 @@
 
 #include <vector>
 
-#include "math/vector2f.h"
-#include "math/vector4f.h"
-#include "math/matrix3f.h"
-#include "math/matrix4f.h"
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector4f.h>
+#include <parrlibcore/matrix3f.h>
+#include <parrlibcore/matrix4f.h>
 
 #include "shader.h"
 

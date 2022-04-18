@@ -4,7 +4,7 @@
 #include <AL/alc.h>
 #include <AL/alut.h>
 
-#include "../math/vector3f.h"
+#include <parrlibcore/vector3f.h>
 
 #include "AudioClip.h"
 

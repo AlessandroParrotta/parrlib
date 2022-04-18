@@ -1,8 +1,9 @@
 #include "common.h"
 
+#include <parrlibcore/stringutils.h>
+
 #include "shader.h"
 #include "../parrlib/debug.h"
-#include "../parrlib/math/stringutils.h"
 
 namespace dx11 {
 

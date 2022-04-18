@@ -1,20 +1,22 @@
 #include "mesh3d.h"
 #include "globals.h"
 
-#include "math/stringutils.h"
+#include <parrlibcore/stringutils.h>
+
+#include "util.h"
 #include "debug.h"
 
 namespace prb {
 	Mesh3D::Mesh3D() {}
 
 	Mesh3D::Mesh3D(geom3::geommesh3 const& m) {
-		Timer t;
+		//Timer t;
 
 		ib = { m.idx };
 		vb = { { (interleaveVB(interleaveVB(interleaveVB(m.pos, 3, m.norm, 3), 3+3, m.col, 4), 3+3+4, m.uv, 2)) },  { 3,3,4,2 } };
 		if (m.mat.texpaths.size() > 0) { tex = stru::fallbackPath(outl::getExeFolder(), m.mat.texpaths[0]).c_str(); }
 		
-		t.set(); deb::tss << "mesh3 geom3 time " << t.getTime().c_str() << "\n"; deb::outStr();
+		//t.set(); deb::tss << "mesh3 geom3 time " << t.time() << "\n"; deb::outStr();
 	}
 	Mesh3D::Mesh3D(const char* fileName) : Mesh3D(geom3::geommesh3(fileName)) {}
 

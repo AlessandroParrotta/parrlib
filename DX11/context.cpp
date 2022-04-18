@@ -3,10 +3,11 @@
 #include <thread>
 #include <chrono>
 
+#include <parrlibcore/utils2d/axisalignedboundingbox2d.h>
+
 #include "common.h"
 #include "../parrlib/debug.h"
 #include "../parrlib/context.h"
-#include "../parrlib/math/utils2d/axisalignedboundingbox2d.h"
 
 namespace dx11 {
 	namespace DXContext {

@@ -2,9 +2,9 @@
 
 #include <windows.h>
 
-#include "math/vector2f.h"
-#include "math/vector3f.h"
-#include "math/utils2d/axisalignedboundingbox2d.h"
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector3f.h>
+#include <parrlibcore/utils2d/axisalignedboundingbox2d.h>
 
 namespace prb {
 	namespace DXVideoPlayer { class Sample3DSceneRenderer; }

@@ -1,9 +1,10 @@
 #include <windows.h>
 
-#include "../parrlib/math/vector2f.h"
-#include "../parrlib/math/vector4f.h"
-#include "../parrlib/math/utils2d/axisalignedboundingbox2d.h"
-#include "../parrlib/constants.h"
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector4f.h>
+#include <parrlibcore/utils2d/axisalignedboundingbox2d.h>
+
+#include <parrlibcore/constants.h>
 
 namespace softst {
 	using namespace prb;

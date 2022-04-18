@@ -1,7 +1,8 @@
 #include "impl.h"
 
+#include <parrlibcore/stringutils.h>
+
 #include "../debug.h"
-#include "../math/stringutils.h"
 
 namespace prb {
 	namespace impl {

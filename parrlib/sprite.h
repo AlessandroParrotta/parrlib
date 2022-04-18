@@ -4,12 +4,12 @@
 #include <unordered_map>
 #include <array>
 
-#include "texture.h"
-#include "math/matrix3f.h"
-#include "time.h"
+#include <parrlibcore/matrix3f.h>
+#include <parrlibcore/stringutils.h>
+#include <parrlibcore/otherutil.h>
+#include <parrlibcore/tick.h>
 
-#include "math/stringutils.h"
-#include "math/otherutil.h"
+#include "texture.h"
 
 #include "debug.h"
 
@@ -59,7 +59,7 @@ namespace prb {
 
 				if (!loop && curFrame >= anim.frames - 1) { finished = true; return; }
 
-				curTime += gtime::deltaTime * speed;
+				curTime += tick::deltaTime * speed;
 
 				float animDuration = (1.f / anim.fps) * anim.frames; //in seconds
 				curFrame = (int)(anim.frames * (curTime / animDuration));

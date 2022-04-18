@@ -2,7 +2,7 @@
 
 #include <SOIL/SOIL.h>
 
-#include "../parrlib/math/stringutils.h"
+#include <parrlibcore/stringutils.h>
 
 #include "statemachine.h" 
 

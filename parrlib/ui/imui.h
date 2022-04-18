@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../math/matrix3f.h"
+#include <parrlibcore/matrix3f.h>
 #include "../globals.h"
 
 class Sprite;

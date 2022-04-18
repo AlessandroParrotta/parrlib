@@ -9,9 +9,9 @@
 
 #include <SOIL/SOIL.h>
 
-#include "../parrlib/math/Matrix3f.h"
-#include "../parrlib/math/vector2f.h"
-#include "../parrlib/math/vector4f.h"
+#include <parrlibcore/Matrix3f.h>
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector4f.h>
 
 #include "../parrlib/impl/texture.h"
 

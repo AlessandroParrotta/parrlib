@@ -8,9 +8,9 @@
 #include <mutex>
 #include <algorithm>
 
+#include <parrlibcore/stringutils.h>
+#include <parrlibcore/utils2d/utils2d.h>
 
-#include "math/stringutils.h"
-#include "math/utils2d/utils2d.h"
 #include "TextRenderer.h"
 
 namespace prb {

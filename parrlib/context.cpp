@@ -1,6 +1,6 @@
 #include "context.h"
 
-#include "math/timer.h"
+#include <parrlibcore/timer.h>
 
 #include "Input.h"
 #include "debug.h"
@@ -154,7 +154,7 @@ namespace prb {
         void setHandleMessageLoop(bool handleMessageLoop) { prc::handleMessageLoop = handleMessageLoop; }
         bool getHandleMessageLoop() { return handleMessageLoop; }
 
-        double getCurTime() { return gtime::time; }
+        double getCurTime() { return tick::time; }
 
         bool initialized = false;
 
@@ -212,13 +212,13 @@ namespace prb {
             std::chrono::duration<uint64_t, std::nano> timeDiff = deltaLater - deltaNow;
             double renderTime = timeDiff.count();
 
-            gtime::deltaTime = renderTime / (double)1e09;
+            tick::deltaTime = renderTime / (double)1e09;
 
             deltaNow = std::chrono::high_resolution_clock::now();
 
-            gtime::time += gtime::deltaTime;
+            tick::time += tick::deltaTime;
 
-            deb::rtss << "FPS: " << (1. / gtime::deltaTime) << "\n";
+            deb::rtss << "FPS: " << (1. / tick::deltaTime) << "\n";
 
             impl::context::clear(clearColor);
             impl::context::setBlend(true);
@@ -405,7 +405,7 @@ namespace prb {
             }break;
             case WM_PAINT:
             {
-                if (gtime::time < .1f) {
+                if (tick::time < .1f) {
                     PAINTSTRUCT ps;
                     HDC hdc = BeginPaint(hWnd, &ps);
                     FillRect(hdc, &ps.rcPaint, (HBRUSH)(2)); //2 is black, for some reason
@@ -591,11 +591,11 @@ namespace prb {
                     std::chrono::duration<uint64_t, std::nano> timeDiff = deltaLater - deltaNow;
                     double renderTime = timeDiff.count();
 
-                    gtime::deltaTime = renderTime / (double)1e09;
+                    tick::deltaTime = renderTime / (double)1e09;
 
                     deltaNow = std::chrono::high_resolution_clock::now();
 
-                    gtime::time += gtime::deltaTime;
+                    tick::time += tick::deltaTime;
                 }
 
                 if (!skipFrameb) {

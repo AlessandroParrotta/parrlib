@@ -2,10 +2,11 @@
 
 #include <SOIL/SOIL.h>
 
-#include "common.h"
+#include <parrlibcore/stringutils.h>
 
 #include "../parrlib/debug.h"
-#include "../parrlib/math/stringutils.h"
+
+#include "common.h"
 
 //#include "../parrlib/debug.h"
 //#include "../parrlib/util.h"

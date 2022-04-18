@@ -2,9 +2,8 @@
 
 #include <vector>
 
-#include "../Vector2f.h"
-
-#include "../physics2d/collider2d.h"
+#include <parrlibcore/Vector2f.h>
+#include <parrlibcore/physics2d/collider2d.h>
 
 namespace prb {
 	class Poly;

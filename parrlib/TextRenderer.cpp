@@ -2,11 +2,12 @@
 
 #include <functional>
 
+#include <parrlibcore/stringutils.h>
+
 #include "debug.h"
 #include "shader.h"
 #include "util.h"
 
-#include "math/stringutils.h"
 
 namespace prb {
 	void TextRenderer::defInit() {

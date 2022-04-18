@@ -3,17 +3,19 @@
 #include <unordered_map>
 #include <iostream>
 
+#include <parrlibcore/matrix4f.h>
+#include <parrlibcore/matrix3f.h>
+#include <parrlibcore/matrix2f.h>
+
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector3f.h>
+
+#include <parrlibcore/otherutil.h>
+
+#include <parrlibcore/constants.h>
+#include <parrlibcore/tick.h>
+
 #include "Input.h"
-#include "constants.h"
-#include "Time.h"
-#include "math/Matrix4f.h"
-#include "math/Matrix3f.h"
-#include "math/Matrix2f.h"
-
-#include "math/Vector2f.h"
-#include "math/Vector3f.h"
-
-#include "math/OtherUtil.h"
 
 #include "impl/impl.h"
 

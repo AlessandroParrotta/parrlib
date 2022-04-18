@@ -10,13 +10,13 @@
 #include FT_OUTLINE_H
 #include FT_STROKER_H
 
-#include "math/vector2f.h"
-#include "math/vector4f.h"
-#include "math/utils2d/axisalignedboundingbox2d.h"
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector4f.h>
+#include <parrlibcore/utils2d/axisalignedboundingbox2d.h>
+#include <parrlibcore/stringutils.h>
 
 #include "Texture.h"
 #include "vertexbuffer.h"
-#include "math/stringutils.h"
 
 namespace prb {
 	class TextRenderer {

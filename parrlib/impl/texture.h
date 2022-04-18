@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "../math/vector2f.h"
+#include <parrlibcore/vector2f.h>
 
 namespace prb {
 	namespace impl {

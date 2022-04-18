@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../math/matrix3f.h"
-#include "../math/matrix4f.h"
+#include <parrlibcore/matrix3f.h>
+#include <parrlibcore/matrix4f.h>
 
 namespace prb {
 	namespace impl {

@@ -1,9 +1,10 @@
 #include "Input.h"
 
+#include <parrlibcore/stringutils.h>
+#include <parrlibcore/otherutil.h>
+#include <parrlibcore/constants.h>
+
 #include "debug.h"
-#include "math/stringutils.h"
-#include "math/otherutil.h"
-#include "constants.h"
 #include "context.h"
 
 namespace prb {

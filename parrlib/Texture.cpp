@@ -1,6 +1,7 @@
 #include "Texture.h"
 
-#include "math/stringutils.h"
+#include <parrlibcore/stringutils.h>
+
 #include "debug.h"
 #include "globals.h"
 #include "util.h"

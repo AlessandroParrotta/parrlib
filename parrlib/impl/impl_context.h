@@ -3,9 +3,9 @@
 #include <windows.h>
 #include <functional>
 
-#include "../math/vector2f.h"
-#include "../math/vector4f.h"
-#include "../math/utils2d/axisalignedboundingbox2d.h"
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector4f.h>
+#include <parrlibcore/utils2d/axisalignedboundingbox2d.h>
 
 namespace prb {
 	namespace impl {

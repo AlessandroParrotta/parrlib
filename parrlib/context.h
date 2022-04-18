@@ -9,9 +9,10 @@
 #include <filesystem>
 #include <ShellScalingApi.h>
 
-#include "../parrlib/math/vector2f.h"
-#include "../parrlib/math/vector4f.h"
-#include "../parrlib/constants.h"
+#include <parrlibcore/vector2f.h>
+#include <parrlibcore/vector4f.h>
+
+#include <parrlibcore/constants.h>
 
 #include "debug.h"
 

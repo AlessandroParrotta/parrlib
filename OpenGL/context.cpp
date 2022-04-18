@@ -1,7 +1,8 @@
 #include "context.h"
 
-#include "../parrlib/math/stringutils.h"
-#include "../parrlib/math/otherutil.h"
+#include <parrlibcore/stringutils.h>
+#include <parrlibcore/otherutil.h>
+
 #include "../parrlib/debug.h"
 #include "../parrlib/context.h"
 

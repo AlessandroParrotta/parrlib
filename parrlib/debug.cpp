@@ -7,8 +7,8 @@
 #include <codecvt>
 #include <string>
 
-#include "math/otherutil.h"
-#include "math/stringutils.h"
+#include <parrlibcore/otherutil.h>
+#include <parrlibcore/stringutils.h>
 
 #include "util.h"
 #include "input.h"

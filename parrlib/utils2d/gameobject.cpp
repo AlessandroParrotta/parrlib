@@ -1,8 +1,8 @@
 #include "GameObject.h"
 
+#include <parrlibcore/utils2d/Poly.h>
 
-#include "Poly.h"
-#include "../../time.h"
+#include <parrlibcore/tick.h>
 
 namespace prb {
 	GameObject::GameObject() {
@@ -56,7 +56,7 @@ namespace prb {
 	void GameObject::update() {
 		if (!isSleeping()) {
 			if (oldPos == pos && oldRot == rot) {
-				sleepTimer += gtime::deltaTime;
+				sleepTimer += tick::deltaTime;
 				if (sleepTimer > sleepTime) {
 					putToSleep();
 					sleepTimer = 0.0f;

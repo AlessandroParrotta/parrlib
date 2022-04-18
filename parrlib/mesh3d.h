@@ -1,8 +1,8 @@
 #pragma once
 
-#include "indexbuffer.h"
-#include "math/utils3d/geom3d.h"
+#include <parrlibcore/utils3d/geom3d.h>
 
+#include "indexbuffer.h"
 #include "globals.h"
 
 namespace prb {

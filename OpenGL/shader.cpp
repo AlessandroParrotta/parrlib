@@ -9,7 +9,8 @@
 #include <sstream>
 #include <filesystem>
 
-#include "../parrlib/math/stringutils.h"
+#include <parrlibcore/stringutils.h>
+
 #include "../parrlib/debug.h"
 
 namespace gl {

@@ -5,9 +5,10 @@
 #include <any>
 #include <d3dcompiler.h>
 
+#include <parrlibcore/matrix4f.h>
+
 #include "common.h"
 #include "../parrlib/impl/shader.h"
-#include "../parrlib/math/matrix4f.h"
 
 #include "constantbuffer.h"
 
