@@ -2,7 +2,7 @@
 
 #include <filesystem>
 
-#include <parrlibcore/stringutils.h>
+#include "../parrlib/stringutils.h"
 #include <parrlibcore/otherutil.h>
 
 #include "../parrlib/debug.h"
@@ -187,12 +187,12 @@ namespace dx11 {
             shaderDesc.push_back(desc);
         }
 
-        std::string fileNameVS = stru::fallbackPath(outl::getExeFolder(), name + "v.cso");
-        std::string fileNamePS = stru::fallbackPath(outl::getExeFolder(), name + "p.cso");
+        std::string fileNameVS = strup::fallbackPath(outl::getExeFolder(), name + "v.cso");
+        std::string fileNamePS = strup::fallbackPath(outl::getExeFolder(), name + "p.cso");
         
         if (!std::filesystem::exists(fileNameVS) || !std::filesystem::exists(fileNamePS)) {
-            fileNameVS = stru::fallbackPath(outl::getExeFolder(), name + "v.hlsl");
-            fileNamePS = stru::fallbackPath(outl::getExeFolder(), name + "p.hlsl");
+            fileNameVS = strup::fallbackPath(outl::getExeFolder(), name + "v.hlsl");
+            fileNamePS = strup::fallbackPath(outl::getExeFolder(), name + "p.hlsl");
 
             return new Shader(fileNameVS, fileNamePS, shaderDesc, true);
         }

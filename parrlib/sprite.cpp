@@ -1,11 +1,13 @@
 #include "Sprite.h"
 
+#include "../parrlib/stringutils.h"
+
 namespace prb {
 	Sprite::Sprite() {}
 	Sprite::Sprite(Texture const& tex) : tex(tex) {/* this->tex.setFiltering(GL_NEAREST);*/ }
 	Sprite::Sprite(const char* tex) : Sprite(Texture(tex)) {
 		//try loading an spt file if present (in the same folder of the texture)
-		std::string tTex = stru::fallbackPath(tex);
+		std::string tTex = strup::fallbackPath(tex);
 
 		std::vector<std::string> spt = stru::splitFilePath(tTex);
 

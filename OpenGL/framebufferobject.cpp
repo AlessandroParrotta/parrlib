@@ -29,7 +29,7 @@ namespace gl {
 			glBindTexture(GL_TEXTURE_2D, at);
 			if (com::checkForGLErrors()) std::terminate();
 
-			deb::tss << "framebuffer format " << com::glIntToString(format.internalFormat) << " " << com::glCodeToString(format.format) << " " << com::glCodeToString(format.magFilter) << " " << com::glCodeToString(format.minFilter) << " " << com::glCodeToString(format.type) << " " << com::glCodeToString(format.wrap_s) << " " << com::glCodeToString(format.wrap_t) << "\n"; deb::outStr();
+			deb::tss << "framebuffer format " << stru::towstr(com::glIntToString(format.internalFormat)) << " " << stru::towstr(com::glCodeToString(format.format)) << " " << stru::towstr(com::glCodeToString(format.magFilter)) << " " << stru::towstr(com::glCodeToString(format.minFilter)) << " " << stru::towstr(com::glCodeToString(format.type)) << " " << stru::towstr(com::glCodeToString(format.wrap_s)) << " " << stru::towstr(com::glCodeToString(format.wrap_t)) << "\n"; deb::outStr();
 			deb::tss << sizeX << " " << sizeY << "\n"; deb::outStr();
 
 			glTexImage2D(GL_TEXTURE_2D, 0, format.internalFormat, sizeX, sizeY, 0, format.format, format.type, NULL);

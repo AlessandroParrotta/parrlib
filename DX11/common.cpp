@@ -80,7 +80,7 @@ namespace dx11 {
 
         if (!f.is_open() || !f.good()) {
             //throw std::runtime_error("file could not be opened\n"); 
-            deb::tss << "could not open file '" << name << "'"; deb::mbe();
+            deb::tss << "could not open file '" << stru::towstr(name) << "'"; deb::mbe();
             std::terminate();
         }
 

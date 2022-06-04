@@ -35,7 +35,7 @@ namespace gl {
 
 			std::string lastErrStr = GetLastErrorAsString(lastErr);
 
-			if (lastErrStr.compare("") != 0) { if (showErrorMessage) { deb::tss << "Win32 Error (" << lastErr << "): " << lastErrStr; deb::mbe(); } return true; }
+			if (lastErrStr.compare("") != 0) { if (showErrorMessage) { deb::tss << "Win32 Error (" << lastErr << "): " << stru::towstr(lastErrStr); deb::mbe(); } return true; }
 
 			return false;
 		}
@@ -60,7 +60,7 @@ namespace gl {
 			bool wasError = false;
 
 			while ((err = glGetError()) != GL_NO_ERROR) {
-				deb::tss << "GL error: " << printGLError(err) << "\n"; deb::mbe();
+				deb::tss << "GL error: " << stru::towstr(printGLError(err)) << "\n"; deb::mbe();
 				wasError = true;
 			}
 

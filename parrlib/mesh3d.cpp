@@ -1,7 +1,7 @@
 #include "mesh3d.h"
 #include "globals.h"
 
-#include <parrlibcore/stringutils.h>
+#include "../parrlib/stringutils.h"
 
 #include "util.h"
 #include "debug.h"
@@ -14,7 +14,7 @@ namespace prb {
 
 		ib = { m.idx };
 		vb = { { (interleaveVB(interleaveVB(interleaveVB(m.pos, 3, m.norm, 3), 3+3, m.col, 4), 3+3+4, m.uv, 2)) },  { 3,3,4,2 } };
-		if (m.mat.texpaths.size() > 0) { tex = stru::fallbackPath(outl::getExeFolder(), m.mat.texpaths[0]).c_str(); }
+		if (m.mat.texpaths.size() > 0) { tex = strup::fallbackPath(outl::getExeFolder(), m.mat.texpaths[0]).c_str(); }
 		
 		//t.set(); deb::tss << "mesh3 geom3 time " << t.time() << "\n"; deb::outStr();
 	}

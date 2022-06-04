@@ -1,6 +1,6 @@
 #include "impl.h"
 
-#include <parrlibcore/stringutils.h>
+#include "../stringutils.h"
 
 #include "../debug.h"
 
@@ -97,7 +97,11 @@ namespace prb {
 		}
 
 		void init(std::wstring dllName) {
-			backendModule = LoadLibrary(stru::fallbackPath((L"backend\\" + dllName)).c_str());
+			//deb::outStr("fallbackpath ", L"", L"parrlibassets", L"backend\\" + dllName, "\n");
+			//std::wstring backPath = stru::fallbackPath(L"", L"parrlibassets", L"backend\\" + dllName);
+			//backendModule = LoadLibrary(backPath.c_str());
+
+			backendModule = LoadLibrary(strup::fallbackPath(L"backend\\" + dllName).c_str());
 			if (!backendModule) { deb::mbe(L"could not load backend module '" + dllName + L"'"); std::terminate();  return; }
 			//if (!backendModule) { std::terminate(); return; }
 

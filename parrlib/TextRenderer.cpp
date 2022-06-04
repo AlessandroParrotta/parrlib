@@ -2,7 +2,7 @@
 
 #include <functional>
 
-#include <parrlibcore/stringutils.h>
+#include "../parrlib/stringutils.h"
 
 #include "debug.h"
 #include "shader.h"
@@ -16,7 +16,7 @@ namespace prb {
 
 	TextRenderer::TextRenderer() {}
 	TextRenderer::TextRenderer(std::vector<std::string> const& fonts, int fontSize) {
-		this->font = stru::fallbackPath(outl::getExeFolder(), fonts[0]); //TODO implement multiple fonts
+		this->font = strup::fallbackPath(outl::getExeFolder(), fonts[0]); //TODO implement multiple fonts
 		this->vfontSize = fontSize;
 
 		if (FT_Init_FreeType(&library)) {

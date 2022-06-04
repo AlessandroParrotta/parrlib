@@ -2,7 +2,7 @@
 
 #include <SOIL/SOIL.h>
 
-#include <parrlibcore/stringutils.h>
+#include "../parrlib/stringutils.h"
 
 #include "../parrlib/debug.h"
 
@@ -87,7 +87,7 @@ namespace dx11 {
     Texture::Texture(std::wstring const& path) {
         this->path = path;
 
-        std::string tFileName = stru::fallbackPath(stru::tostr(path));
+        std::string tFileName = strup::fallbackPath(stru::tostr(path));
 
         int w, h, channels;
         unsigned char* data = SOIL_load_image(tFileName.c_str(), &w, &h, &channels, SOIL_LOAD_RGBA);

@@ -9,7 +9,7 @@
 #include <sstream>
 #include <filesystem>
 
-#include <parrlibcore/stringutils.h>
+#include "../parrlib/stringutils.h"
 
 #include "../parrlib/debug.h"
 
@@ -17,7 +17,7 @@ namespace gl {
 	std::string Shader::readShader(std::string const& fileName) {
 		if (fileName.compare("") == 0) return "";
 
-		std::string fname = stru::fallbackPath(fileName);
+		std::string fname = strup::fallbackPath(fileName);
 
 		std::string shaderCode;
 		std::ifstream file(fname, std::ios::in);
@@ -34,7 +34,7 @@ namespace gl {
 		//}
 
 		if (!file.good()) {
-			deb::tss << "\ncan't read file " << fileName; deb::mbe();
+			deb::tss << "\ncan't read file " << stru::towstr(fileName); deb::mbe();
 			terminate();
 		}
 
@@ -63,7 +63,7 @@ namespace gl {
 			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &info_log_length);
 			std::vector<char> shader_log(info_log_length);
 			glGetShaderInfoLog(shader, info_log_length, NULL, &shader_log[0]);
-			deb::tss << "\nERROR compiling shader " << source << "\n\n: " << "\n" << &shader_log[0]; deb::mbe();
+			deb::tss << "\nERROR compiling shader " << stru::towstr(source) << "\n\n: " << "\n" << &shader_log[0]; deb::mbe();
 			return 0;
 		}
 
@@ -120,7 +120,7 @@ namespace gl {
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_log_length);
 			std::vector<char> program_log(info_log_length);
 			glGetProgramInfoLog(program, info_log_length, NULL, &program_log[0]);
-			deb::tss << "\nShader Loader : LINK ERROR ()\n" << &program_log[0] << "\n" << ss.str(); deb::mbe();
+			deb::tss << "\nShader Loader : LINK ERROR ()\n" << &program_log[0] << "\n" << stru::towstr(ss.str()); deb::mbe();
 			return 0;
 		}
 		return program;
@@ -129,7 +129,7 @@ namespace gl {
 	GLint Shader::getLocation(std::string const& str) {
 		if (uniforms.find(str) == uniforms.end()) {
 			uniforms[str] = glGetUniformLocation(program, str.c_str());
-			if (uniforms[str] == -1) { deb::tss << "shader " << program << ": uniform '" << str << "' not found (or has been optimized away)!\n"; deb::mbe(); }
+			if (uniforms[str] == -1) { deb::tss << "shader " << program << ": uniform '" << stru::towstr(str) << "' not found (or has been optimized away)!\n"; deb::mbe(); }
 		}
 		return uniforms[str];
 	}
@@ -194,16 +194,16 @@ namespace gl {
 
 		std::vector<std::string> shaders;
 		if (fl[2].compare(".sh") == 0) {
-			std::string fback = stru::fallbackPath(fileName);
+			std::string fback = strup::fallbackPath(fileName);
 			std::fstream f(fback, std::ios::in);
 
-			if (!f.good()) { deb::tss << "could not find shader '" + fileName + "'!\n"; deb::mbe(); return; }
+			if (!f.good()) { deb::tss << "could not find shader '" << stru::towstr(fileName) << "'!\n"; deb::mbe(); return; }
 
 			while (f.good()) {
 				char str[1000];
 				f.getline(str, 1000);
 				shaders.push_back(fl[0] + str);
-				deb::tss << "read " << shaders.back() << "\n"; deb::mbe();
+				deb::tss << "read " << stru::towstr(shaders.back()) << "\n"; deb::mbe();
 			}
 
 			f.close();
@@ -212,10 +212,10 @@ namespace gl {
 		}
 		else if (fl[2].compare("") == 0) {
 			this->program = createProgram(compileShaders(getSourceCodes({
-				stru::fallbackPath(fileName + ".vert"),
-				stru::fallbackPath(fileName + ".tes"),
-				stru::fallbackPath(fileName + ".geom"),
-				stru::fallbackPath(fileName + ".frag")
+				strup::fallbackPath(fileName + ".vert"),
+				strup::fallbackPath(fileName + ".tes"),
+				strup::fallbackPath(fileName + ".geom"),
+				strup::fallbackPath(fileName + ".frag")
 				})));
 		}
 	}
@@ -231,8 +231,8 @@ namespace gl {
 	}
 
 	extern "C" __declspec(dllexport) impl::Shader_base * createShader_1(std::string const& name, std::vector<std::pair<std::string, std::string>> const& attributes) {
-		std::string fileNameVS = stru::fallbackPath(outl::getExeFolder(), name + ".vert");
-		std::string fileNamePS = stru::fallbackPath(outl::getExeFolder(), name + ".frag");
+		std::string fileNameVS = strup::fallbackPath(outl::getExeFolder(), name + ".vert");
+		std::string fileNamePS = strup::fallbackPath(outl::getExeFolder(), name + ".frag");
 
 		return new Shader({ fileNameVS, fileNamePS });
 	}

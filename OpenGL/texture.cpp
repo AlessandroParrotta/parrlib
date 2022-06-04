@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-#include <parrlibcore/stringutils.h>
+#include "../parrlib/stringutils.h"
 
 #include "../parrlib/util.h"
 #include "../parrlib/debug.h"
@@ -316,7 +316,7 @@ namespace gl {
 		//size = vec2(width, height);
 		//texID = id;
 
-		std::string tfileName = stru::fallbackPath(fileName);
+		std::string tfileName = strup::fallbackPath(fileName);
 
 		id = SOIL_load_OGL_texture(tfileName.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 		if (id == 0) deb::outStr("OpenGL BACKEND ERROR: texture ", fileName.c_str(), " could not be created (maybe file does not exist?)\n");

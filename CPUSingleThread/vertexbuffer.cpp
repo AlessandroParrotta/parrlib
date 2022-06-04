@@ -61,8 +61,8 @@ namespace softst {
 
 			// possible standard: always put position first in vertResult (4-dimensional vector always) then all others in the order they're specified by the user
 			vertBB = aabb2{ vec2{ vertResult1[0],  vertResult1[1] } };
-			vertBB.rescale({ vertResult2[0],  vertResult2[1] });
-			vertBB.rescale({ vertResult3[0],  vertResult3[1] });
+			vertBB.rescale(vec2{ vertResult2[0],  vertResult2[1] });
+			vertBB.rescale(vec2{ vertResult3[0],  vertResult3[1] });
 
 			for (int y = vertBB.miny(); y < vertBB.maxy(); y++) {
 				for (int x = vertBB.minx(); x < vertBB.maxx(); x++) {

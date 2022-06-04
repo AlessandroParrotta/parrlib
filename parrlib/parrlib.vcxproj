@@ -42,6 +42,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="spritebatch.h" />
+    <ClInclude Include="stringutils.h" />
     <ClInclude Include="textrenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="ui\imui.h" />
